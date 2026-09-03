@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Calculate Restaurant Break-Even | RestaurantProfitCalc</title>
+<meta name="description" content="Your break-even is the revenue you need before you keep a cent. How to calculate it, turn it into covers per night, and what to do if the number looks bad.">
+<meta name="keywords" content="restaurant break even point, restaurant break even analysis, fixed costs restaurant, restaurant covers needed, restaurant financial planning">
+<meta property="og:title" content="How to Calculate Your Restaurant's Break-Even Point">
+<meta property="og:description" content="The revenue you need before you make a cent — and how to convert it into covers per night.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/blog/restaurant-break-even-analysis">
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "How to Calculate Your Restaurant's Break-Even Point",
+"datePublished": "2026-08-15",
+"dateModified": "2026-09-01",
+"author": {
+"@type": "Person",
+"name": "Terry McDonnell",
+"url": "https://www.restaurantprofitcalc.com/about",
+"description": "Chartered accountant and former restaurant owner-operator."
+},
+"publisher": {
+"@type": "Organization",
+"name": "RestaurantProfitCalc",
+"url": "https://www.restaurantprofitcalc.com/"
+},
+"mainEntityOfPage": "https://www.restaurantprofitcalc.com/blog/restaurant-break-even-analysis"
+}
+</script>
+<!-- Consent Mode v2 defaults — must load before AdSense -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+  'wait_for_update': 500
+});
+(function(){
+  try {
+    var c = localStorage.getItem('rpc-consent');
+    if (c === 'granted') {
+      gtag('consent', 'update', {
+        'ad_storage':'granted','ad_user_data':'granted',
+        'ad_personalization':'granted','analytics_storage':'granted'
+      });
+    }
+  } catch(e){}
+})();
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);--text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;--rust:#b84c2a;--rust-light:#fdf0ec;--green:#1a5e38;--radius:8px;--radius-lg:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
+a{color:var(--rust);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px;text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.article-wrap{display:grid;grid-template-columns:1fr 300px;gap:48px;padding:56px 0 80px;align-items:start}
+@media(max-width:760px){.article-wrap{grid-template-columns:1fr}.sidebar{display:none}.nav-links{display:none}}
+article{min-width:0}
+.article-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 12px;border-radius:20px;margin-bottom:16px}
+article h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:400;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
+.article-meta{font-size:13px;color:var(--hint);margin-bottom:8px;line-height:1.7}
+.article-meta strong{color:var(--text);font-weight:500}
+.article-meta a{color:var(--rust)}
+.article-meta-line2{font-size:13px;color:var(--hint);margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+article h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;letter-spacing:-.3px;margin:40px 0 12px;line-height:1.2}
+article h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;margin:28px 0 8px}
+article p{color:var(--muted);line-height:1.8;margin-bottom:16px}
+article ul,article ol{padding-left:22px;margin-bottom:16px}
+article li{color:var(--muted);line-height:1.8;margin-bottom:6px}
+article strong{color:var(--text);font-weight:500}
+article hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+.highlight-box{background:var(--surface2);border-left:3px solid var(--rust);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:24px 0}
+.highlight-box p{margin:0;font-size:15px;color:var(--text)}
+.cta-box{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin:40px 0;text-align:center}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:8px}
+.cta-box p{color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:20px}
+.cta-link{display:inline-block;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:500;padding:11px 28px;background:var(--rust);color:#fff;border-radius:var(--radius);text-decoration:none;transition:opacity .15s}
+.cta-link:hover{opacity:.88;text-decoration:none}
+.article-footer{font-size:12px;color:var(--hint);padding-top:24px;border-top:1px solid var(--border);line-height:1.7;font-style:italic}
+.sidebar{position:sticky;top:24px}
+.sidebar-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px}
+.sidebar-card h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:12px}
+.sidebar-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.sidebar-card a.btn{display:block;text-align:center;font-size:13px;font-weight:500;padding:9px 16px;background:var(--rust);color:#fff;border-radius:var(--radius);text-decoration:none}
+.sidebar-card a.btn:hover{opacity:.88}
+.quick-facts{list-style:none;padding:0}
+.quick-facts li{font-size:13px;color:var(--muted);padding:7px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quick-facts li:last-child{border-bottom:none}
+.quick-facts .val{font-weight:500;color:var(--text)}
+.adspot{display:none}
+/* Ad placeholders are hidden until real AdSense units are in place.
+   To re-enable after approval: delete the rule above, paste your
+   <ins class="adsbygoogle"> unit inside each .adspot div, and restore
+   the original styling below if you want the container visible.
+   .adspot{background:var(--surface2);border:1px dashed var(--border-med);border-radius:var(--radius);padding:20px;text-align:center;font-size:12px;color:var(--hint);margin:16px 0;min-height:90px;display:flex;align-items:center;justify-content:center}
+*/
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;background:var(--surface)}
+footer p{font-size:12px;color:var(--hint);line-height:1.8;max-width:560px;margin:0 auto}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links"><a href="/">Calculator</a><a href="/blog/">Blog</a><a href="/about">About</a></div>
+  </div>
+</nav>
+<div class="container">
+<div class="article-wrap">
+<article>
+<div class="article-tag">Financial Planning</div>
+<h1>How to Calculate Your Restaurant's Break-Even Point</h1>
+<div class="article-meta">By <strong><a href="/about">Terry McDonnell</a></strong> — chartered accountant, former owner of seven fast-food franchises and a nine-year independent restaurant</div>
+<div class="article-meta-line2">Published August 2026 &nbsp;·&nbsp; 8 min read</div>
+
+<p>There's a number that sits underneath every other number in your business: the revenue you have to generate before you keep a single dollar. Below it you're funding the restaurant out of reserves. Above it, every additional dollar behaves very differently from the ones that came before.</p>
+<p>Most operators have never worked it out. It takes about fifteen minutes.</p>
+
+<hr>
+
+<h2>Split your costs in two</h2>
+<p>Break-even analysis depends on one distinction: which costs move with sales, and which don't.</p>
+<p><strong>Variable costs</strong> rise and fall with revenue — food, beverage, and the portion of wages that flexes with trade. Sell nothing and they approach zero.</p>
+<p><strong>Fixed costs</strong> arrive whether you open or not. Rent, insurance, salaried management, loan repayments, subscriptions, the standing charge on your utilities.</p>
+<div class="highlight-box"><p><strong>Labour sits in both.</strong> Casual staff rostered to demand are variable. Your head chef, your manager, and yourself are fixed. Split the wage bill between the two rather than forcing it into one.</p></div>
+
+<hr>
+
+<h2>The calculation</h2>
+<p>Three steps.</p>
+<p><strong>1. Contribution margin ratio.</strong> Take your variable costs as a percentage of revenue and subtract from 100%. If food and variable labour together run 62%, your contribution margin is 38%. Every dollar of sales leaves 38 cents toward fixed costs.</p>
+<p><strong>2. Total your fixed costs</strong> for the period. Weekly is most useful for a restaurant — it matches how you already think about trade.</p>
+<p><strong>3. Divide.</strong></p>
+<p><strong>Break-even revenue = fixed costs ÷ contribution margin ratio</strong></p>
+<p>Fixed costs of $9,500 a week at a 38% contribution margin gives $25,000. That's the number.</p>
+
+<h3>Convert it into something you can see</h3>
+<p>Weekly revenue is abstract. Covers are not.</p>
+<p>Divide break-even revenue by your average spend per head, then by the days you trade. At $25,000 with a $45 average spend, that's 556 covers a week — 93 a night across six nights.</p>
+<p>Now it's a number your floor staff would recognise. You can look at a Tuesday and know immediately whether it paid for itself.</p>
+
+<div class="adspot"><!-- AdSense unit here --></div>
+
+<hr>
+
+<h2>Why the number is often uncomfortable</h2>
+<p>The common reaction to a first break-even calculation is that it looks too high. Usually it's correct and something else is wrong.</p>
+<p><strong>Fixed costs have crept.</strong> Subscriptions, a second manager hired during a growth phase, a lease escalation — each defensible alone, collectively significant. Every dollar of fixed cost raises break-even by nearly three at a 38% margin.</p>
+<p><strong>Contribution margin is thinner than assumed.</strong> If food cost drifted from 30% to 34%, your margin fell four points and break-even rose by roughly $2,600 a week. This is the mechanism behind <a href="/blog/what-is-a-good-restaurant-profit-margin">margins quietly disappearing</a> without any obvious cause.</p>
+<p><strong>The owner's wage was left out.</strong> If you haven't included a market-rate salary for yourself, break-even is understated by whatever you're not paying yourself. The business isn't breaking even; it's being subsidised by your unpaid labour.</p>
+
+<hr>
+
+<h2>What it tells you that a P&amp;L doesn't</h2>
+
+<h3>Which nights to keep open</h3>
+<p>Once you know fixed costs continue regardless, the question for a marginal night changes. It isn't "did Tuesday make a profit" but "did Tuesday's revenue exceed its variable costs." If it contributed anything toward fixed costs, closing makes you worse off — the rent arrives either way.</p>
+
+<h3>What a discount really costs</h3>
+<p>At a 38% contribution margin, a 20% discount doesn't cost 20% of profit. It removes 20 cents from a 38-cent contribution — over half. To stand still you'd need roughly double the covers.</p>
+
+<h3>How much cushion you have</h3>
+<p>The gap between actual revenue and break-even is your margin of safety. Turning over $30,000 against a $25,000 break-even means a 17% drop wipes out your profit entirely. Given normal seasonality, that's tighter than it sounds — and it's why <a href="/blog/why-restaurants-fail">seasonal cash flow</a> takes down businesses that look fine in summer.</p>
+
+<hr>
+
+<h2>Recalculate twice a year</h2>
+<p>Break-even isn't static. Rent reviews, wage increases, supplier movements and menu changes all shift it, and they shift it gradually enough that nobody notices until the annual accounts arrive.</p>
+<p>Put it in the diary for every six months. Fifteen minutes, and you'll know whether the ground has moved under you.</p>
+
+<div class="cta-box">
+<h3>Find your break-even in two minutes</h3>
+<p>Enter your weekly revenue and costs to see how far above or below break-even you are.</p>
+<a class="cta-link" href="/">Use the free calculator →</a>
+</div>
+
+<div class="article-footer">RestaurantProfitCalc.com is a free tool for restaurant and hospitality operators. Results are indicative only and do not constitute financial advice.</div>
+</article>
+
+<aside class="sidebar">
+<div class="sidebar-card">
+<h4>Calculate your position</h4>
+<p>See your weekly net profit and how much headroom sits above break-even.</p>
+<a href="/" class="btn">Free calculator →</a>
+</div>
+<div class="sidebar-card">
+<h4>Break-even reference</h4>
+<ul class="quick-facts">
+<li><span>Typical variable cost</span><span class="val">60–70%</span></li>
+<li><span>Contribution margin</span><span class="val">30–40%</span></li>
+<li><span>Fixed costs</span><span class="val">Rent, insurance, salaries</span></li>
+<li><span>Safety buffer</span><span class="val">15–20% above BE</span></li>
+<li><span>Recalculate</span><span class="val">Every 6 months</span></li>
+</ul>
+</div>
+<div class="adspot" style="margin:0"><!-- AdSense unit here --></div>
+</aside>
+</div>
+</div>
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  <a href="/">Calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<!-- Cookie consent banner -->
+<style>
+#rpc-consent{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:var(--surface,#fff);
+  border-top:1px solid var(--border-med,rgba(0,0,0,.14));box-shadow:0 -2px 20px rgba(0,0,0,.06);
+  padding:18px 24px;display:none}
+#rpc-consent.show{display:block}
+.rpc-consent-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.rpc-consent-text{flex:1;min-width:260px;font-family:'Source Sans 3',sans-serif;font-size:13px;
+  line-height:1.65;color:var(--muted,#1c1a17)}
+.rpc-consent-text strong{color:var(--text,#1c1a17);font-weight:500}
+.rpc-consent-btns{display:flex;gap:10px;flex-shrink:0}
+.rpc-btn{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:500;padding:9px 20px;
+  border-radius:var(--radius,8px);cursor:pointer;border:1px solid var(--border-med,rgba(0,0,0,.14));
+  background:transparent;color:var(--muted,#1c1a17);transition:opacity .15s,border-color .15s}
+.rpc-btn:hover{border-color:var(--text,#1c1a17);color:var(--text,#1c1a17)}
+.rpc-btn.primary{background:var(--rust,#b84c2a);border-color:var(--rust,#b84c2a);color:#fff}
+.rpc-btn.primary:hover{opacity:.88;color:#fff}
+.rpc-btn:focus-visible{outline:2px solid var(--rust,#b84c2a);outline-offset:2px}
+@media(max-width:600px){.rpc-consent-btns{width:100%}.rpc-btn{flex:1}}
+</style>
+<div id="rpc-consent" role="dialog" aria-live="polite" aria-label="Cookie choices">
+  <div class="rpc-consent-inner">
+    <div class="rpc-consent-text">
+      <strong>We use cookies for analytics and advertising.</strong> The numbers you enter into the
+      calculator are never stored or sent anywhere — that works either way. Read the
+      <a href="/privacy">privacy policy</a>.
+    </div>
+    <div class="rpc-consent-btns">
+      <button class="rpc-btn" onclick="rpcConsent('denied')">Reject non-essential</button>
+      <button class="rpc-btn primary" onclick="rpcConsent('granted')">Accept all</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var el = document.getElementById('rpc-consent');
+  var stored = null;
+  try { stored = localStorage.getItem('rpc-consent'); } catch(e){}
+  if (!stored) el.classList.add('show');
+})();
+function rpcConsent(state){
+  try { localStorage.setItem('rpc-consent', state); } catch(e){}
+  if (typeof gtag === 'function') {
+    gtag('consent', 'update', {
+      'ad_storage': state, 'ad_user_data': state,
+      'ad_personalization': state, 'analytics_storage': state
+    });
+  }
+  document.getElementById('rpc-consent').classList.remove('show');
+}
+</script>
+
+</body>
+</html>

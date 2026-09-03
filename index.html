@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Profitability Calculator — Know Your Numbers</title>
+<meta name="description" content="Free restaurant profitability calculator. Enter revenue, food cost, labour and rent to instantly see your net profit margin and where money is leaking.">
+<meta name="keywords" content="restaurant profitability calculator, restaurant profit margin calculator, food cost calculator, restaurant P&L calculator, restaurant net profit, hospitality profitability, restaurant financial calculator, food business profit calculator">
+<meta property="og:title" content="Restaurant Profitability Calculator — Know Your Numbers">
+<meta property="og:description" content="See your true restaurant profit margin in seconds. Simple or detailed mode. Built by people who've actually run restaurants.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/">
+<!-- Consent Mode v2 defaults — must load before AdSense -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+  'wait_for_update': 500
+});
+(function(){
+  try {
+    var c = localStorage.getItem('rpc-consent');
+    if (c === 'granted') {
+      gtag('consent', 'update', {
+        'ad_storage':'granted','ad_user_data':'granted',
+        'ad_personalization':'granted','analytics_storage':'granted'
+      });
+    }
+  } catch(e){}
+})();
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface2: #f3f0eb;
+  --surface3: #ece8e1;
+  --border: rgba(0,0,0,0.08);
+  --border-med: rgba(0,0,0,0.14);
+  --text: #1c1a17;
+  --muted: #1c1a17;
+  --hint: #5a554f;
+  --rust: #b84c2a;
+  --rust-light: #fdf0ec;
+  --rust-dim: rgba(184,76,42,0.1);
+  --green: #1a5e38;
+  --green-light: #eaf5ef;
+  --amber: #92520a;
+  --amber-light: #fef4e6;
+  --red: #b91c1c;
+  --red-light: #fef2f2;
+  --radius: 8px;
+  --radius-lg: 14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 48px;text-align:center}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.5px;margin-bottom:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.hero p{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.65}
+
+.mode-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.mode-inner{max-width:1000px;margin:0 auto;display:flex;gap:0}
+.mode-btn{font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:400;padding:14px 28px;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
+.mode-btn.active{color:var(--rust);border-bottom-color:var(--rust);font-weight:500}
+.mode-btn:hover{color:var(--text)}
+
+.calc-section{padding:36px 0 48px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:700px){.calc-grid{grid-template-columns:1fr}.nav-links{display:none}}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:18px;color:var(--text)}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+.input-wrap{display:flex;align-items:center;border:1px solid var(--border-med);border-radius:var(--radius);background:var(--bg);overflow:hidden;transition:border-color .15s}
+.input-wrap:focus-within{border-color:var(--rust)}
+.input-pre,.input-suf{padding:0 10px;font-size:14px;color:var(--hint);background:var(--surface2);height:38px;display:flex;align-items:center;white-space:nowrap}
+.input-pre{border-right:1px solid var(--border)}
+.input-suf{border-left:1px solid var(--border)}
+.input-wrap input{flex:1;font-family:'Source Sans 3',sans-serif;font-size:15px;padding:8px 12px;border:none;background:transparent;color:var(--text);outline:none;min-width:0}
+.field .hint{font-size:11px;color:var(--hint);margin-top:3px}
+
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.toggle-label{font-size:13px;color:var(--muted)}
+.toggle-link{font-size:12px;color:var(--rust);cursor:pointer;text-decoration:underline}
+.detail-fields{display:none}
+.detail-fields.open{display:block}
+
+/* RESULTS */
+.result-hero{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:14px;color:#fff;text-align:center}
+.rh-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px}
+.rh-val{font-family:'Playfair Display',serif;font-size:52px;font-weight:400;line-height:1;letter-spacing:-1px;margin-bottom:6px}
+.rh-val.good{color:#6ee7a0}
+.rh-val.ok{color:#fcd34d}
+.rh-val.bad{color:#fca5a5}
+.rh-sub{font-size:13px;color:rgba(255,255,255,0.55)}
+
+.verdict-bar{border-radius:var(--radius);padding:12px 16px;margin-bottom:14px;font-size:13px;line-height:1.6}
+.verdict-bar.good{background:var(--green-light);color:var(--green)}
+.verdict-bar.ok{background:var(--amber-light);color:var(--amber)}
+.verdict-bar.bad{background:var(--red-light);color:var(--red)}
+.verdict-bar.empty{background:var(--surface2);color:var(--hint)}
+
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.metric{background:var(--surface2);border-radius:var(--radius);padding:12px 14px}
+.metric .ml{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--hint);margin-bottom:3px}
+.metric .mv{font-size:18px;font-weight:500;color:var(--text)}
+.metric .ms{font-size:11px;color:var(--hint);margin-top:2px}
+
+.pl-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:4px}
+.pl-table th{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--hint);padding:0 0 8px;border-bottom:1px solid var(--border-med);text-align:left}
+.pl-table th:last-child{text-align:right}
+.pl-table td{padding:6px 0;border-bottom:1px solid var(--border);color:var(--muted)}
+.pl-table td:last-child{text-align:right;color:var(--text);font-feature-settings:"tnum"}
+.pl-table tr.subtotal td{font-weight:500;color:var(--text);border-top:1px solid var(--border-med);border-bottom:1px solid var(--border-med)}
+.pl-table tr.total td{font-weight:500;font-size:14px;border-bottom:none;border-top:2px solid var(--text);padding-top:10px;color:var(--text)}
+.pl-table tr.total td:last-child{color:var(--text)}
+.pl-table .good{color:var(--green)}
+.pl-table .bad{color:var(--red)}
+
+.benchmark-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.bench{background:var(--surface2);border-radius:var(--radius);padding:10px 12px;text-align:center}
+.bench .bl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--hint);margin-bottom:3px}
+.bench .bv{font-size:13px;font-weight:500;color:var(--text)}
+.bench .bt{font-size:10px;color:var(--hint);margin-top:2px}
+
+.adspot{display:none}
+/* Ad placeholders are hidden until real AdSense units are in place.
+   To re-enable after approval: delete the rule above, paste your
+   <ins class="adsbygoogle"> unit inside each .adspot div, and restore
+   the original styling below if you want the container visible.
+   .adspot{background:var(--surface2);border:1px dashed var(--border-med);border-radius:var(--radius);padding:20px;text-align:center;font-size:12px;color:var(--hint);margin:16px 0;min-height:90px;display:flex;align-items:center;justify-content:center}
+*/
+
+.content-section{padding:60px 0 68px;border-top:1px solid var(--border)}
+.content-section h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;letter-spacing:-.3px;margin-bottom:12px}
+.content-section h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin:28px 0 8px}
+.content-section p{color:var(--muted);line-height:1.75;margin-bottom:12px;max-width:680px}
+.content-section ul{padding-left:20px;margin-bottom:12px;max-width:680px}
+.content-section li{color:var(--muted);line-height:1.75;margin-bottom:5px}
+
+.benchmarks-table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0 28px;max-width:680px}
+.benchmarks-table th{font-size:12px;font-weight:500;text-align:left;padding:8px 12px;background:var(--surface2);border:1px solid var(--border)}
+.benchmarks-table td{padding:8px 12px;border:1px solid var(--border);color:var(--muted)}
+.benchmarks-table td:first-child{color:var(--text);font-weight:500}
+.benchmarks-table .good{color:var(--green)}
+.benchmarks-table .ok{color:var(--amber)}
+.benchmarks-table .bad{color:var(--red)}
+
+.faq{max-width:680px}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{font-size:14px;font-weight:500;margin-bottom:6px}
+.faq-a{font-size:13px;color:var(--muted);line-height:1.7}
+
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;background:var(--surface)}
+footer p{font-size:12px;color:var(--hint);line-height:1.8;max-width:560px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links">
+      <a href="#calculator">Calculator</a>
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <div class="hero-tag">Free · No signup · Instant results</div>
+    <h1>Is your restaurant actually making money?</h1>
+    <p>Enter your revenue and costs to instantly see your true profit margin — and where your money is leaking.</p>
+  </div>
+</div>
+
+<div class="mode-bar">
+  <div class="mode-inner">
+    <button class="mode-btn active" onclick="setMode('simple',this)">Simple view</button>
+    <button class="mode-btn" onclick="setMode('detailed',this)">Detailed P&amp;L</button>
+  </div>
+</div>
+
+<div id="calculator" class="calc-section">
+  <div class="container">
+    <div class="calc-grid">
+      <div>
+        <!-- SIMPLE MODE -->
+        <div id="simple-inputs">
+          <div class="card">
+            <div class="card-title">Revenue</div>
+            <div class="field">
+              <label>Weekly revenue</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="s-revenue" value="25000" step="500" oninput="calc()"></div>
+              <div class="hint">Total sales including GST/VAT if applicable</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">The big three costs</div>
+            <div class="field">
+              <label>Food &amp; beverage cost (%)</label>
+              <div class="input-wrap"><input type="number" id="s-food" value="30" step="0.5" min="0" max="100" oninput="calc()"><span class="input-suf">%</span></div>
+              <div class="hint">Industry benchmark: 28–35%</div>
+            </div>
+            <div class="field">
+              <label>Labour cost (%)</label>
+              <div class="input-wrap"><input type="number" id="s-labour" value="32" step="0.5" min="0" max="100" oninput="calc()"><span class="input-suf">%</span></div>
+              <div class="hint">Industry benchmark: 28–35%</div>
+            </div>
+            <div class="field">
+              <label>Rent &amp; occupancy (%)</label>
+              <div class="input-wrap"><input type="number" id="s-rent" value="10" step="0.5" min="0" max="100" oninput="calc()"><span class="input-suf">%</span></div>
+              <div class="hint">Industry benchmark: 6–10%</div>
+            </div>
+            <div class="field">
+              <label>Other overheads (%)</label>
+              <div class="input-wrap"><input type="number" id="s-other" value="8" step="0.5" min="0" max="100" oninput="calc()"><span class="input-suf">%</span></div>
+              <div class="hint">Utilities, marketing, supplies, POS, insurance</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETAILED MODE -->
+        <div id="detailed-inputs" style="display:none">
+          <div class="card">
+            <div class="card-title">Revenue</div>
+            <div class="field">
+              <label>Food sales (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-food-rev" value="18000" step="500" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Beverage sales (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-bev-rev" value="5000" step="500" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Other revenue (catering, events, etc.)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-other-rev" value="2000" step="500" oninput="calc()"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Cost of goods sold</div>
+            <div class="field">
+              <label>Food cost (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-food-cost" value="5400" step="100" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Beverage cost (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-bev-cost" value="1250" step="100" oninput="calc()"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Labour</div>
+            <div class="field">
+              <label>Kitchen wages (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-kitchen" value="4800" step="100" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Front of house wages (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-foh" value="3200" step="100" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Management / owner salary (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-mgmt" value="1500" step="100" oninput="calc()"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Occupancy &amp; overheads</div>
+            <div class="field">
+              <label>Rent / lease (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-rent" value="2500" step="100" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Utilities — power, gas, water (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-utilities" value="600" step="50" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Marketing &amp; advertising (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-marketing" value="300" step="50" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Repairs, maintenance &amp; supplies (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-repairs" value="250" step="50" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Insurance (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-insurance" value="200" step="50" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>POS, software &amp; subscriptions (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-software" value="150" step="50" oninput="calc()"></div>
+            </div>
+            <div class="field">
+              <label>Other costs (weekly)</label>
+              <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="d-other-cost" value="200" step="50" oninput="calc()"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="section-label">Results</div>
+          <div class="result-hero">
+            <div class="rh-label">Net profit margin</div>
+            <div class="rh-val good" id="r-margin">20.0%</div>
+            <div class="rh-sub" id="r-sub">$5,000 net profit per week · $260,000 per year</div>
+          </div>
+
+          <div class="verdict-bar good" id="r-verdict">Excellent — a 20.0% margin puts you in the top tier of restaurant operators. Keep watching prime cost and protect those margins as you grow.</div>
+
+          <div class="metrics-grid">
+            <div class="metric"><div class="ml">Weekly revenue</div><div class="mv" id="r-revenue">$25,000</div></div>
+            <div class="metric"><div class="ml">Weekly net profit</div><div class="mv" id="r-profit">$5,000</div></div>
+            <div class="metric"><div class="ml">Annual revenue</div><div class="mv" id="r-ann-rev">$1,300,000</div></div>
+            <div class="metric"><div class="ml">Annual net profit</div><div class="mv" id="r-ann-profit">$260,000</div></div>
+          </div>
+
+          <div class="section-label">P&amp;L breakdown</div>
+          <table class="pl-table" id="pl-table">
+            <thead><tr><th>Line item</th><th>Weekly $</th><th>% of rev</th></tr></thead>
+            <tbody id="pl-body"><tr class=""><td>Revenue</td><td class="good">$25,000</td><td>100.0%</td></tr><tr class=""><td>Food &amp; beverage cost</td><td class="bad">−$7,500</td><td>30.0%</td></tr><tr class=""><td>Labour</td><td class="bad">−$8,000</td><td>32.0%</td></tr><tr class=""><td>Rent &amp; occupancy</td><td class="bad">−$2,500</td><td>10.0%</td></tr><tr class=""><td>Other overheads</td><td class="bad">−$2,000</td><td>8.0%</td></tr><tr class="total"><td>Net profit</td><td class="good">$5,000</td><td>20.0%</td></tr></tbody>
+          </table>
+
+          <div class="benchmark-row">
+            <div class="bench"><div class="bl">Your food %</div><div class="bv" id="b-food">30.0%</div><div class="bt">Target: 28–35%</div></div>
+            <div class="bench"><div class="bl">Your labour %</div><div class="bv" id="b-labour">32.0%</div><div class="bt">Target: 28–35%</div></div>
+            <div class="bench"><div class="bl">Prime cost</div><div class="bv" id="b-prime">62.0%</div><div class="bt">Target: under 65%</div></div>
+          </div>
+        </div>
+
+        <div class="adspot"><!-- AdSense unit here --></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="adspot"><!-- AdSense leaderboard here --></div>
+
+  <div id="benchmarks" class="content-section">
+    <h2>Restaurant industry benchmarks</h2>
+    <p>These are widely accepted benchmarks for full-service and quick-service restaurants. Your ideal targets will vary by concept, location, and cuisine type — but these are the numbers every operator should know.</p>
+
+    <table class="benchmarks-table">
+      <thead><tr><th>Cost line</th><th>Excellent</th><th>Acceptable</th><th>Warning sign</th></tr></thead>
+      <tbody>
+        <tr><td>Food cost %</td><td class="good">25–28%</td><td class="ok">28–35%</td><td class="bad">35%+</td></tr>
+        <tr><td>Beverage cost %</td><td class="good">18–24%</td><td class="ok">24–30%</td><td class="bad">30%+</td></tr>
+        <tr><td>Labour cost %</td><td class="good">25–28%</td><td class="ok">28–35%</td><td class="bad">35%+</td></tr>
+        <tr><td>Prime cost (food + labour)</td><td class="good">Under 55%</td><td class="ok">55–65%</td><td class="bad">65%+</td></tr>
+        <tr><td>Occupancy / rent %</td><td class="good">Under 6%</td><td class="ok">6–10%</td><td class="bad">10%+</td></tr>
+        <tr><td>Net profit margin</td><td class="good">10–15%+</td><td class="ok">5–10%</td><td class="bad">Under 5%</td></tr>
+      </tbody>
+    </table>
+
+    <h3>What is prime cost and why does it matter?</h3>
+    <p>Prime cost is your food/beverage cost plus your total labour cost combined. It's the single most important number in restaurant finance because these are your two largest and most controllable costs. Most profitable restaurants keep prime cost below 60–65% of revenue. If your prime cost is above 70%, profitability becomes extremely difficult regardless of how well you manage everything else.</p>
+
+    <h3>Why restaurant profit margins are lower than people think</h3>
+    <p>The average full-service restaurant operates on a net profit margin of 3–9%. Fast casual and quick service typically do better at 6–12%. Fine dining varies enormously. Most people outside the industry assume restaurant margins are much higher — the reality is that food, labour, and rent together typically consume 70–80% of revenue before you've paid a single overhead bill.</p>
+    <p>This is why the "big three" — food cost, labour, and occupancy — are watched so obsessively by experienced operators. A 2% improvement in food cost on a $1M annual revenue restaurant is $20,000 straight to the bottom line.</p>
+
+    <h3>The most common profit leaks</h3>
+    <ul>
+      <li>Food waste and portion control inconsistency — often 3–5% of revenue in poorly managed kitchens</li>
+      <li>Overstaffing on slow shifts — labour is the easiest cost to over-spend and the hardest to cut once staff are hired</li>
+      <li>Rent above 10% of revenue — a structurally difficult position that requires very high volume to overcome</li>
+      <li>Underpriced menu items — many operators haven't properly costed their dishes since opening</li>
+      <li>Beverage margins not maximised — drinks typically carry 70–80% gross margins and are often the most profitable revenue line</li>
+    </ul>
+  </div>
+
+  <div id="faq" style="padding-bottom:72px">
+    <h2 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;letter-spacing:-.3px;margin-bottom:8px">Frequently asked questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">What is a good net profit margin for a restaurant?</div>
+        <div class="faq-a">For a full-service restaurant, a net margin of 10–15% is considered strong. 5–10% is acceptable. Under 5% means the business is vulnerable to any cost increases or revenue dips. Fast casual and quick service typically run 6–15% due to leaner labour models.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Should I include my own salary in labour costs?</div>
+        <div class="faq-a">Yes — always include an owner/operator salary at market rate, even if you're not drawing it. This gives you a true picture of the business's profitability. A restaurant that only "makes money" because the owner is working for free is not a profitable business — it's an expensive job.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's included in prime cost?</div>
+        <div class="faq-a">Prime cost = total cost of goods sold (food + beverages) + total labour (including wages, salaries, payroll taxes, and benefits). It's the combined cost of your two biggest variable expenses and the most important single metric in restaurant financial management.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How often should I calculate my restaurant's profitability?</div>
+        <div class="faq-a">Weekly at minimum for labour and food cost. Monthly for a full P&amp;L review. Many successful operators do a simplified prime cost calculation every single week — it's the fastest early warning system for cost problems before they become serious.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">My food cost percentage looks fine but I'm still not making money — why?</div>
+        <div class="faq-a">The most common culprits are labour (check your hours vs covers ratio), occupancy (rent above 10% is structurally very difficult), and hidden overheads that have crept up over time. Use the detailed P&amp;L mode above to see every cost line as a percentage of revenue — the answer is usually obvious once the numbers are laid out clearly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  Results are indicative only. Always consult a qualified accountant for formal financial advice.<br>
+  <a href="/">Calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<script>
+let mode = 'simple';
+
+function setMode(m, btn) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('simple-inputs').style.display = m === 'simple' ? 'block' : 'none';
+  document.getElementById('detailed-inputs').style.display = m === 'detailed' ? 'block' : 'none';
+  calc();
+}
+
+function fmt(n) {
+  const abs = Math.abs(n);
+  const s = abs >= 1000 ? '$' + Math.round(abs).toLocaleString() : '$' + Math.round(abs);
+  return n < 0 ? '−' + s : s;
+}
+function pct(n) { return n.toFixed(1) + '%'; }
+
+function calc() {
+  let revenue, foodCost, labourCost, rentCost, otherCost;
+  let plRows = [];
+
+  if (mode === 'simple') {
+    revenue = parseFloat(document.getElementById('s-revenue').value) || 0;
+    const foodPct = (parseFloat(document.getElementById('s-food').value) || 0) / 100;
+    const labourPct = (parseFloat(document.getElementById('s-labour').value) || 0) / 100;
+    const rentPct = (parseFloat(document.getElementById('s-rent').value) || 0) / 100;
+    const otherPct = (parseFloat(document.getElementById('s-other').value) || 0) / 100;
+    foodCost = revenue * foodPct;
+    labourCost = revenue * labourPct;
+    rentCost = revenue * rentPct;
+    otherCost = revenue * otherPct;
+
+    plRows = [
+      { label: 'Revenue', val: revenue, pctVal: 100, bold: true },
+      { label: 'Food & beverage cost', val: -foodCost, pctVal: foodPct * 100 },
+      { label: 'Labour', val: -labourCost, pctVal: labourPct * 100 },
+      { label: 'Rent & occupancy', val: -rentCost, pctVal: rentPct * 100 },
+      { label: 'Other overheads', val: -otherCost, pctVal: otherPct * 100 },
+    ];
+  } else {
+    const foodRev = parseFloat(document.getElementById('d-food-rev').value) || 0;
+    const bevRev = parseFloat(document.getElementById('d-bev-rev').value) || 0;
+    const otherRev = parseFloat(document.getElementById('d-other-rev').value) || 0;
+    revenue = foodRev + bevRev + otherRev;
+
+    const foodCostAmt = parseFloat(document.getElementById('d-food-cost').value) || 0;
+    const bevCostAmt = parseFloat(document.getElementById('d-bev-cost').value) || 0;
+    foodCost = foodCostAmt + bevCostAmt;
+
+    const kitchen = parseFloat(document.getElementById('d-kitchen').value) || 0;
+    const foh = parseFloat(document.getElementById('d-foh').value) || 0;
+    const mgmt = parseFloat(document.getElementById('d-mgmt').value) || 0;
+    labourCost = kitchen + foh + mgmt;
+
+    const rent = parseFloat(document.getElementById('d-rent').value) || 0;
+    const utilities = parseFloat(document.getElementById('d-utilities').value) || 0;
+    const marketing = parseFloat(document.getElementById('d-marketing').value) || 0;
+    const repairs = parseFloat(document.getElementById('d-repairs').value) || 0;
+    const insurance = parseFloat(document.getElementById('d-insurance').value) || 0;
+    const software = parseFloat(document.getElementById('d-software').value) || 0;
+    const otherCostAmt = parseFloat(document.getElementById('d-other-cost').value) || 0;
+    rentCost = rent;
+    otherCost = utilities + marketing + repairs + insurance + software + otherCostAmt;
+
+    plRows = [
+      { label: 'Food sales', val: foodRev, pctVal: revenue > 0 ? foodRev/revenue*100 : 0 },
+      { label: 'Beverage sales', val: bevRev, pctVal: revenue > 0 ? bevRev/revenue*100 : 0 },
+      { label: 'Other revenue', val: otherRev, pctVal: revenue > 0 ? otherRev/revenue*100 : 0 },
+      { label: 'Total revenue', val: revenue, pctVal: 100, subtotal: true },
+      { label: 'Food cost', val: -foodCostAmt, pctVal: revenue > 0 ? foodCostAmt/revenue*100 : 0 },
+      { label: 'Beverage cost', val: -bevCostAmt, pctVal: revenue > 0 ? bevCostAmt/revenue*100 : 0 },
+      { label: 'Gross profit', val: revenue - foodCost, pctVal: revenue > 0 ? (revenue-foodCost)/revenue*100 : 0, subtotal: true },
+      { label: 'Kitchen wages', val: -kitchen, pctVal: revenue > 0 ? kitchen/revenue*100 : 0 },
+      { label: 'Front of house wages', val: -foh, pctVal: revenue > 0 ? foh/revenue*100 : 0 },
+      { label: 'Management salary', val: -mgmt, pctVal: revenue > 0 ? mgmt/revenue*100 : 0 },
+      { label: 'Rent', val: -rent, pctVal: revenue > 0 ? rent/revenue*100 : 0 },
+      { label: 'Utilities', val: -utilities, pctVal: revenue > 0 ? utilities/revenue*100 : 0 },
+      { label: 'Marketing', val: -marketing, pctVal: revenue > 0 ? marketing/revenue*100 : 0 },
+      { label: 'Repairs & maintenance', val: -repairs, pctVal: revenue > 0 ? repairs/revenue*100 : 0 },
+      { label: 'Insurance', val: -insurance, pctVal: revenue > 0 ? insurance/revenue*100 : 0 },
+      { label: 'Software & POS', val: -software, pctVal: revenue > 0 ? software/revenue*100 : 0 },
+      { label: 'Other costs', val: -otherCostAmt, pctVal: revenue > 0 ? otherCostAmt/revenue*100 : 0 },
+    ];
+  }
+
+  const totalCosts = foodCost + labourCost + rentCost + otherCost;
+  const netProfit = revenue - totalCosts;
+  const margin = revenue > 0 ? (netProfit / revenue) * 100 : 0;
+  const primeCost = revenue > 0 ? ((foodCost + labourCost) / revenue) * 100 : 0;
+  const foodPctOfRev = revenue > 0 ? (foodCost / revenue) * 100 : 0;
+  const labourPctOfRev = revenue > 0 ? (labourCost / revenue) * 100 : 0;
+
+  const marginEl = document.getElementById('r-margin');
+  marginEl.textContent = margin.toFixed(1) + '%';
+  marginEl.className = 'rh-val ' + (margin >= 10 ? 'good' : margin >= 5 ? 'ok' : 'bad');
+
+  document.getElementById('r-sub').textContent = fmt(netProfit) + ' net profit per week · ' + fmt(netProfit * 52) + ' per year';
+  document.getElementById('r-revenue').textContent = fmt(revenue);
+  document.getElementById('r-profit').textContent = fmt(netProfit);
+  document.getElementById('r-ann-rev').textContent = fmt(revenue * 52);
+  document.getElementById('r-ann-profit').textContent = fmt(netProfit * 52);
+
+  const verdict = document.getElementById('r-verdict');
+  if (margin >= 10) {
+    verdict.className = 'verdict-bar good';
+    verdict.textContent = 'Excellent — a ' + margin.toFixed(1) + '% margin puts you in the top tier of restaurant operators. Keep watching prime cost and protect those margins as you grow.';
+  } else if (margin >= 5) {
+    verdict.className = 'verdict-bar good';
+    verdict.textContent = 'Solid — ' + margin.toFixed(1) + '% is a healthy, sustainable margin. The industry average is 3–9%, so you\'re performing well. Focus on the highest cost line to find your next improvement.';
+  } else if (margin >= 3) {
+    verdict.className = 'verdict-bar ok';
+    verdict.textContent = 'Marginal — ' + margin.toFixed(1) + '% leaves little buffer for unexpected costs. Review your prime cost and look for the biggest percentage cost line above benchmark.';
+  } else if (margin >= 0) {
+    verdict.className = 'verdict-bar bad';
+    verdict.textContent = 'Warning — ' + margin.toFixed(1) + '% is dangerously thin. A single bad week or cost increase could put the business in the red. Immediate action needed on costs.';
+  } else {
+    verdict.className = 'verdict-bar bad';
+    verdict.textContent = 'Loss-making — the business is currently spending more than it earns. Review every cost line urgently, starting with prime cost.';
+  }
+
+  const tbody = document.getElementById('pl-body');
+  const allRows = [...plRows, { label: 'Net profit', val: netProfit, pctVal: margin, total: true }];
+  tbody.innerHTML = allRows.map(r => {
+    const cls = r.total ? 'total' : r.subtotal ? 'subtotal' : '';
+    const valCls = r.val < 0 ? 'bad' : (r.label.includes('profit') || r.label.includes('Revenue') || r.label.includes('revenue') || r.label.includes('sales') ? 'good' : '');
+    return `<tr class="${cls}"><td>${r.label}</td><td class="${valCls}">${fmt(r.val)}</td><td>${r.pctVal.toFixed(1)}%</td></tr>`;
+  }).join('');
+
+  document.getElementById('b-food').textContent = pct(foodPctOfRev);
+  document.getElementById('b-labour').textContent = pct(labourPctOfRev);
+  document.getElementById('b-prime').textContent = pct(primeCost);
+}
+
+calc();
+</script>
+
+<!-- Cookie consent banner -->
+<style>
+#rpc-consent{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:var(--surface,#fff);
+  border-top:1px solid var(--border-med,rgba(0,0,0,.14));box-shadow:0 -2px 20px rgba(0,0,0,.06);
+  padding:18px 24px;display:none}
+#rpc-consent.show{display:block}
+.rpc-consent-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.rpc-consent-text{flex:1;min-width:260px;font-family:'Source Sans 3',sans-serif;font-size:13px;
+  line-height:1.65;color:var(--muted,#1c1a17)}
+.rpc-consent-text strong{color:var(--text,#1c1a17);font-weight:500}
+.rpc-consent-btns{display:flex;gap:10px;flex-shrink:0}
+.rpc-btn{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:500;padding:9px 20px;
+  border-radius:var(--radius,8px);cursor:pointer;border:1px solid var(--border-med,rgba(0,0,0,.14));
+  background:transparent;color:var(--muted,#1c1a17);transition:opacity .15s,border-color .15s}
+.rpc-btn:hover{border-color:var(--text,#1c1a17);color:var(--text,#1c1a17)}
+.rpc-btn.primary{background:var(--rust,#b84c2a);border-color:var(--rust,#b84c2a);color:#fff}
+.rpc-btn.primary:hover{opacity:.88;color:#fff}
+.rpc-btn:focus-visible{outline:2px solid var(--rust,#b84c2a);outline-offset:2px}
+@media(max-width:600px){.rpc-consent-btns{width:100%}.rpc-btn{flex:1}}
+</style>
+<div id="rpc-consent" role="dialog" aria-live="polite" aria-label="Cookie choices">
+  <div class="rpc-consent-inner">
+    <div class="rpc-consent-text">
+      <strong>We use cookies for analytics and advertising.</strong> The numbers you enter into the
+      calculator are never stored or sent anywhere — that works either way. Read the
+      <a href="/privacy">privacy policy</a>.
+    </div>
+    <div class="rpc-consent-btns">
+      <button class="rpc-btn" onclick="rpcConsent('denied')">Reject non-essential</button>
+      <button class="rpc-btn primary" onclick="rpcConsent('granted')">Accept all</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var el = document.getElementById('rpc-consent');
+  var stored = null;
+  try { stored = localStorage.getItem('rpc-consent'); } catch(e){}
+  if (!stored) el.classList.add('show');
+})();
+function rpcConsent(state){
+  try { localStorage.setItem('rpc-consent', state); } catch(e){}
+  if (typeof gtag === 'function') {
+    gtag('consent', 'update', {
+      'ad_storage': state, 'ad_user_data': state,
+      'ad_personalization': state, 'analytics_storage': state
+    });
+  }
+  document.getElementById('rpc-consent').classList.remove('show');
+}
+</script>
+
+</body>
+</html>

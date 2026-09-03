@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About RestaurantProfitCalc — Who Runs It | RestaurantProfitCalc</title>
+<meta name="description" content="Who builds RestaurantProfitCalc, where the benchmark figures come from, how the calculator works, and what the site deliberately isn't.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/about">
+<!-- Consent Mode v2 defaults — must load before AdSense -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+'ad_storage': 'denied',
+'ad_user_data': 'denied',
+'ad_personalization': 'denied',
+'analytics_storage': 'denied',
+'wait_for_update': 500
+});
+(function(){
+try {
+var c = localStorage.getItem('rpc-consent');
+if (c === 'granted') {
+gtag('consent', 'update', {
+'ad_storage':'granted','ad_user_data':'granted',
+'ad_personalization':'granted','analytics_storage':'granted'
+});
+}
+} catch(e){}
+})();
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);--text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;--rust:#b84c2a;--rust-light:#fdf0ec;--green:#1a5e38;--radius:8px;--radius-lg:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
+a{color:var(--rust);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px;text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.doc-wrap{max-width:720px;margin:0 auto;padding:56px 0 80px}
+article{min-width:0}
+.article-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 12px;border-radius:20px;margin-bottom:16px}
+article h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:400;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
+.article-meta{font-size:13px;color:var(--hint);margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+article h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;letter-spacing:-.3px;margin:40px 0 12px;line-height:1.2}
+article h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;margin:28px 0 8px}
+article p{color:var(--muted);line-height:1.8;margin-bottom:16px}
+article ul,article ol{padding-left:22px;margin-bottom:16px}
+article li{color:var(--muted);line-height:1.8;margin-bottom:6px}
+article strong{color:var(--text);font-weight:500}
+article hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+.highlight-box{background:var(--surface2);border-left:3px solid var(--rust);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:24px 0}
+.highlight-box p{margin:0;font-size:15px;color:var(--text)}
+.cta-box{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin:40px 0;text-align:center}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:8px}
+.cta-box p{color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:20px}
+.cta-link{display:inline-block;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:500;padding:11px 28px;background:var(--rust);color:#fff;border-radius:var(--radius);text-decoration:none;transition:opacity .15s}
+.cta-link:hover{opacity:.88;text-decoration:none}
+.article-footer{font-size:12px;color:var(--hint);padding-top:24px;border-top:1px solid var(--border);line-height:1.7;font-style:italic;margin-top:40px}
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;background:var(--surface)}
+footer p{font-size:12px;color:var(--hint);line-height:1.8;max-width:560px;margin:0 auto}
+@media(max-width:600px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/">restaurant<span>profit</span>calc</a>
+<div class="nav-links"><a href="/">Calculator</a><a href="/blog/">Blog</a><a href="/about">About</a></div>
+</div>
+</nav>
+
+<div class="container">
+<div class="doc-wrap">
+<article>
+<div class="article-tag">About</div>
+<h1>About RestaurantProfitCalc</h1>
+<div class="article-meta">RestaurantProfitCalc.com &nbsp;·&nbsp; Free tools for hospitality operators</div>
+
+<p>Most restaurant owners can tell you what they took last Saturday night. Far fewer can tell you what they kept. That gap is what this site exists to close.</p>
+
+<hr>
+
+<h2>Why this exists</h2>
+<p>Restaurant accounting software is either expensive, complicated, or both — and it usually arrives too late. A monthly P&amp;L tells you about a problem four weeks after it started. By then the roster has been written three more times and the supplier invoices are already paid.</p>
+<p>What most operators actually need is something much simpler: a way to take last week's revenue, wages, and invoices and see, in under two minutes, whether the business is making money and which cost line is out of shape. That's the whole idea behind the calculator. No signup, no trial, no upsell to a paid tier.</p>
+
+<div class="highlight-box"><p>The calculator runs entirely in your browser. Your numbers are never sent to us, stored, or seen by anyone. Close the tab and they're gone.</p></div>
+
+<hr>
+
+<h2>Who's behind it</h2>
+<p>RestaurantProfitCalc is written and maintained by <strong>Terry McDonnell</strong>.</p>
+<p>A chartered accountant by training, he spent the early part of his career managing several manufacturing companies before moving into food. Over the years that followed he built, ran and sold seven fast food franchises, and most recently owned and operated a restaurant for nine years — selling it recently, at a healthy capital profit.</p>
+<p>That combination is the reason this site takes the shape it does. The accounting background is why every figure here is tied back to a percentage of revenue rather than a gut feel. The nine years behind a restaurant is why the calculator asks for the numbers you can actually lay your hands on at close of business on a Sunday — last week's takings, the wage run, the invoices in the drawer — instead of the ones your accountant assembles a month later.</p>
+<p>You can reach us at <a href="mailto:hello@restaurantprofitcalc.com">hello@restaurantprofitcalc.com</a>. We read everything, including the corrections.</p>
+
+<hr>
+
+<h2>Where the benchmark numbers come from</h2>
+<p>Every benchmark on this site — food cost of 28–35%, labour of 28–35%, prime cost under 65%, occupancy under 10% — comes from figures that are widely used across hospitality accounting and industry reporting. They are ranges, not rules, and they're most useful as a first check: if one of your cost lines sits well outside its range, that's where to look first.</p>
+<p>Two things worth saying plainly:</p>
+<ul>
+<li><strong>These ranges vary by market.</strong> Wage floors, rent, and supplier costs differ enormously between countries and between a CBD site and a suburban one. Treat the benchmarks as a starting point, not a verdict.</li>
+<li><strong>They vary by format.</strong> A quick-service takeaway and a 40-seat fine dining room have genuinely different cost structures. The ranges on our <a href="/blog/what-is-a-good-restaurant-profit-margin">profit margin guide</a> are broken out by concept for this reason.</li>
+</ul>
+<p>If you think one of our figures is wrong or out of date for your market, tell us. We'd rather fix it than defend it.</p>
+
+<hr>
+
+<h2>How the calculator works</h2>
+<p>Simple mode takes your weekly revenue and four cost percentages and returns your net margin, prime cost, and annualised figures. Detailed mode takes actual dollar amounts across fourteen line items and builds a full weekly P&amp;L, so you can see every cost as a percentage of revenue side by side.</p>
+<p>Both modes use the same underlying arithmetic you'd do by hand. There's no proprietary model and nothing hidden — the calculation is revenue minus costs, expressed as a percentage. The value isn't in the maths, it's in having every line laid out in one place with a benchmark next to it.</p>
+
+<hr>
+
+<h2>What this site is not</h2>
+<p>It's not accounting software, and it's not a substitute for an accountant. It doesn't handle tax, depreciation, loan schedules, or statutory reporting. It won't file anything for you.</p>
+<p>The results it produces are indicative. Before you make a decision that matters — signing a lease, taking on debt, restructuring your team — take the numbers to a qualified accountant who knows your business and your jurisdiction.</p>
+
+<hr>
+
+<h2>How the site is funded</h2>
+<p>RestaurantProfitCalc is free and supported by advertising. We don't take sponsorship from POS companies, suppliers, or software vendors, and no advertiser has any say over what we publish or what the benchmarks say. If that ever changes, it'll be disclosed on this page.</p>
+
+<div class="cta-box">
+<h3>See where your restaurant actually stands</h3>
+<p>Enter your real numbers — simple or detailed P&amp;L mode. Takes two minutes.</p>
+<a class="cta-link" href="/">Use the free calculator →</a>
+</div>
+
+<div class="article-footer">
+RestaurantProfitCalc.com is a free tool for restaurant and hospitality operators. Results are indicative only and do not constitute financial advice. Always consult a qualified accountant for formal financial reporting.
+</div>
+</article>
+</div>
+</div>
+
+<footer>
+<p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+<a href="/">Calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<!-- Cookie consent banner -->
+<style>
+#rpc-consent{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:var(--surface,#fff);
+border-top:1px solid var(--border-med,rgba(0,0,0,.14));box-shadow:0 -2px 20px rgba(0,0,0,.06);
+padding:18px 24px;display:none}
+#rpc-consent.show{display:block}
+.rpc-consent-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.rpc-consent-text{flex:1;min-width:260px;font-family:'Source Sans 3',sans-serif;font-size:13px;
+line-height:1.65;color:var(--muted,#1c1a17)}
+.rpc-consent-text strong{color:var(--text,#1c1a17);font-weight:500}
+.rpc-consent-btns{display:flex;gap:10px;flex-shrink:0}
+.rpc-btn{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:500;padding:9px 20px;
+border-radius:var(--radius,8px);cursor:pointer;border:1px solid var(--border-med,rgba(0,0,0,.14));
+background:transparent;color:var(--muted,#1c1a17);transition:opacity .15s,border-color .15s}
+.rpc-btn:hover{border-color:var(--text,#1c1a17);color:var(--text,#1c1a17)}
+.rpc-btn.primary{background:var(--rust,#b84c2a);border-color:var(--rust,#b84c2a);color:#fff}
+.rpc-btn.primary:hover{opacity:.88;color:#fff}
+.rpc-btn:focus-visible{outline:2px solid var(--rust,#b84c2a);outline-offset:2px}
+@media(max-width:600px){.rpc-consent-btns{width:100%}.rpc-btn{flex:1}}
+</style>
+<div id="rpc-consent" role="dialog" aria-live="polite" aria-label="Cookie choices">
+<div class="rpc-consent-inner">
+<div class="rpc-consent-text">
+<strong>We use cookies for analytics and advertising.</strong> The numbers you enter into the
+calculator are never stored or sent anywhere — that works either way. Read the
+<a href="/privacy">privacy policy</a>.
+</div>
+<div class="rpc-consent-btns">
+<button class="rpc-btn" onclick="rpcConsent('denied')">Reject non-essential</button>
+<button class="rpc-btn primary" onclick="rpcConsent('granted')">Accept all</button>
+</div>
+</div>
+</div>
+<script>
+(function(){
+var el = document.getElementById('rpc-consent');
+var stored = null;
+try { stored = localStorage.getItem('rpc-consent'); } catch(e){}
+if (!stored) el.classList.add('show');
+})();
+function rpcConsent(state){
+try { localStorage.setItem('rpc-consent', state); } catch(e){}
+if (typeof gtag === 'function') {
+gtag('consent', 'update', {
+'ad_storage': state, 'ad_user_data': state,
+'ad_personalization': state, 'analytics_storage': state
+});
+}
+document.getElementById('rpc-consent').classList.remove('show');
+}
+</script>
+</body>
+</html>
