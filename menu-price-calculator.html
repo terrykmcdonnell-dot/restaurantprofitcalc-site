@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Menu Price Calculator — Price Any Dish from Plate Cost | RestaurantProfitCalc</title>
+<meta name="description" content="Enter your plate cost and target food cost %. Get the menu price, gross profit per plate, and a delivery-app price that protects your margin. Free, no signup.">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/menu-price-calculator">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Menu Price Calculator",
+  "url": "https://www.restaurantprofitcalc.com/menu-price-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Work out a menu price from plate cost and target food cost percentage, including tax and delivery-app pricing.",
+  "author": { "@type": "Person", "name": "Terry McDonnell", "url": "https://www.restaurantprofitcalc.com/about" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is the formula for menu pricing?","acceptedAnswer":{"@type":"Answer","text":"Menu price = plate cost ÷ target food cost %. A dish costing $4.50 to plate at a 30% target sells for $4.50 ÷ 0.30 = $15.00 before tax."}},
+    {"@type":"Question","name":"What food cost percentage should I target?","acceptedAnswer":{"@type":"Answer","text":"Most full-service restaurants aim for an overall food cost of 28–35%. Individual dishes vary: pasta, pizza and desserts often run 20–25%, while steak and seafood can run 35–40% and still earn good cash margin."}},
+    {"@type":"Question","name":"Should I include GST or sales tax in the calculation?","acceptedAnswer":{"@type":"Answer","text":"Calculate food cost on the price excluding tax, because the tax isn't your money. If your menu shows tax-inclusive prices, as is required in New Zealand and Australia, add the tax on top afterwards."}},
+    {"@type":"Question","name":"How much more should I charge on delivery apps?","acceptedAnswer":{"@type":"Answer","text":"To keep the same dollar profit per plate after a 30% commission and packaging, delivery prices usually need to be 40–60% higher than dine-in. Use the delivery section of the calculator to get the exact figure."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--surface3:#ece8e1;
+  --border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);
+  --text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;
+  --rust:#b84c2a;--rust-light:#fdf0ec;--rust-dim:rgba(184,76,42,0.1);
+  --green:#1a5e38;--green-light:#eaf5ef;--amber:#92520a;--amber-light:#fef4e6;
+  --red:#b91c1c;--red-light:#fef2f2;--radius:8px;--radius-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px}
+.logo:hover{text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:640px){.nav-links{gap:16px}.nav-links a.hide-sm{display:none}}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 48px;text-align:center}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.5px;margin:0 auto 14px;max-width:680px}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.65}
+
+.calc{padding:40px 0}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.calc-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:18px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;margin-bottom:5px}
+.hint{font-size:11px;color:var(--hint);margin-top:3px;line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=number],input[type=text],select{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--border-med);border-radius:var(--radius);background:var(--surface);color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--rust-dim);border-color:var(--rust)}
+.prefix{position:relative}
+.prefix span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.prefix input{padding-left:24px}
+.suffix{position:relative}
+.suffix span{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.suffix input{padding-right:28px}
+
+.ing-row{display:grid;grid-template-columns:1fr 110px 32px;gap:8px;margin-bottom:8px}
+.ing-row button{border:1px solid var(--border-med);background:var(--surface);border-radius:var(--radius);cursor:pointer;color:var(--hint);font-size:16px}
+.ing-row button:hover{color:var(--red);border-color:var(--red)}
+.add-btn{font:inherit;font-size:13px;color:var(--rust);background:var(--rust-light);border:none;border-radius:var(--radius);padding:7px 12px;cursor:pointer;margin-top:4px}
+.add-btn:hover{background:var(--rust-dim)}
+.subtotal{display:flex;justify-content:space-between;font-size:14px;padding-top:12px;margin-top:12px;border-top:1px solid var(--border)}
+.subtotal strong{font-weight:600}
+
+.result-hero{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:14px;color:#fff;text-align:center}
+.result-hero .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.result-hero .big{font-family:'Playfair Display',serif;font-size:48px;line-height:1.1;margin:6px 0 4px}
+.result-hero .sub{font-size:13px;opacity:.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.stat .v{font-size:20px;font-weight:600}
+.stat .l{font-size:11px;color:var(--hint)}
+.verdict{border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-bottom:14px}
+.verdict.good{background:var(--green-light);color:var(--green)}
+.verdict.warn{background:var(--amber-light);color:var(--amber)}
+.verdict.bad{background:var(--red-light);color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border)}
+th{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--hint)}
+td.num,th.num{text-align:right}
+tr.hl td{background:var(--rust-light);font-weight:600}
+
+.content{padding:16px 0 56px}
+.content .inner{max-width:720px;margin:0 auto}
+.content h2{font-family:'Playfair Display',serif;font-weight:400;font-size:26px;line-height:1.2;margin:40px 0 12px}
+.content h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.content p{font-size:16px;margin-bottom:14px}
+.content ul{margin:0 0 14px 20px;font-size:16px}
+.content li{margin-bottom:6px}
+.formula{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--rust);border-radius:var(--radius);padding:14px 16px;font-size:16px;margin:0 0 16px}
+.content table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.content td,.content th{padding:10px 12px}
+.related{background:var(--surface2);border-radius:var(--radius-lg);padding:20px 22px;margin-top:36px}
+.related p{margin-bottom:8px;font-weight:600}
+.related ul{margin-bottom:0}
+.byline{font-size:13px;color:var(--hint);margin-top:28px}
+
+footer{border-top:1px solid var(--border);background:var(--surface);padding:28px 24px;text-align:center;font-size:13px;color:var(--hint);line-height:1.8}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links">
+      <a href="/">Calculator</a>
+      <a href="#calculator">Menu pricing</a>
+      <a href="/blog/" class="hide-sm">Blog</a>
+      <a href="/about" class="hide-sm">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Free menu price calculator</div>
+  <h1>What should this dish sell for?</h1>
+  <p>Add up what goes on the plate, pick your target food cost, and get a price that holds its margin on the floor and on the delivery apps.</p>
+</header>
+
+<main>
+<section class="calc" id="calculator">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- INPUTS -->
+      <div>
+        <div class="card">
+          <div class="card-title">1. Plate cost</div>
+          <div class="section-label">Ingredients for one portion</div>
+          <div id="ingredients"></div>
+          <button class="add-btn" type="button" id="addIng">+ Add ingredient</button>
+          <div class="field" style="margin-top:16px">
+            <label for="waste">Waste and yield allowance</label>
+            <div class="suffix"><input type="number" id="waste" value="5" min="0" max="50" step="0.5"><span>%</span></div>
+            <div class="hint">Trim, spoilage, over-portioning. 3–8% is typical.</div>
+          </div>
+          <div class="subtotal"><span>Plate cost</span><strong id="plateCost">$0.00</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. Your targets</div>
+          <div class="row2">
+            <div class="field">
+              <label for="target">Target food cost</label>
+              <div class="suffix"><input type="number" id="target" value="30" min="5" max="80" step="0.5"><span>%</span></div>
+            </div>
+            <div class="field">
+              <label for="tax">Tax on menu price</label>
+              <div class="suffix"><input type="number" id="tax" value="0" min="0" max="30" step="0.5"><span>%</span></div>
+            </div>
+          </div>
+          <div class="hint" style="margin:-6px 0 14px">Use 15 for NZ GST, 10 for Australian GST, 20 for UK VAT. Leave at 0 if your menu shows prices before tax, as most US menus do.</div>
+          <div class="row2">
+            <div class="field">
+              <label for="rounding">Round menu price to</label>
+              <select id="rounding">
+                <option value="none">Don't round</option>
+                <option value="0.5" selected>Nearest .50</option>
+                <option value="1">Whole dollar</option>
+                <option value="0.9">Ending in .90</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="current">Current menu price <span style="color:var(--hint)">(optional)</span></label>
+              <div class="prefix"><span>$</span><input type="number" id="current" placeholder="0.00" min="0" step="0.5"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. Delivery apps <span style="color:var(--hint);font-family:'Source Sans 3',sans-serif;font-size:13px">(optional)</span></div>
+          <div class="row2">
+            <div class="field">
+              <label for="commission">App commission</label>
+              <div class="suffix"><input type="number" id="commission" value="30" min="0" max="60" step="0.5"><span>%</span></div>
+            </div>
+            <div class="field">
+              <label for="packaging">Packaging per order</label>
+              <div class="prefix"><span>$</span><input type="number" id="packaging" value="0.60" min="0" step="0.05"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="result-hero">
+          <div class="lbl">Suggested menu price</div>
+          <div class="big" id="priceMenu">$0.00</div>
+          <div class="sub" id="priceSub">&nbsp;</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="v" id="gp">$0.00</div><div class="l">Gross profit / plate</div></div>
+          <div class="stat"><div class="v" id="actualFc">0%</div><div class="l">Actual food cost</div></div>
+          <div class="stat"><div class="v" id="markup">0×</div><div class="l">Markup on cost</div></div>
+        </div>
+
+        <div class="verdict" id="currentVerdict" style="display:none"></div>
+
+        <div class="card">
+          <div class="card-title">Price at different food cost targets</div>
+          <table>
+            <thead><tr><th>Food cost</th><th class="num">Price ex tax</th><th class="num">Menu price</th><th class="num">Profit / plate</th></tr></thead>
+            <tbody id="ladder"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Delivery app price</div>
+          <p style="font-size:14px;margin-bottom:12px">To keep the same <strong id="dGpLbl">$0.00</strong> profit per plate after commission and packaging, list it at:</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-family:'Playfair Display',serif;font-size:32px" id="priceDelivery">$0.00</span>
+            <span style="font-size:13px;color:var(--hint)" id="deliveryUplift"></span>
+          </div>
+          <div class="hint" style="font-size:12px;color:var(--hint);margin-top:6px" id="deliveryNote"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<article class="content">
+  <div class="inner">
+
+    <h2>How the menu price formula works</h2>
+    <p>Every menu price comes from the same arithmetic: what the plate costs you, divided by the share of the price you're prepared to spend on food.</p>
+    <div class="formula"><strong>Menu price (ex tax) = plate cost ÷ target food cost %</strong></div>
+    <p>If a dish costs $4.50 to plate and you're targeting 30% food cost, the price is $4.50 ÷ 0.30 = $15.00. The other $10.50 is your gross profit, and it has to cover wages, rent, power, and everything else before any of it is yours.</p>
+    <p>The calculator above does the same thing, plus three things owners usually skip: a waste allowance on the plate cost, tax on top of the menu price, and a separate price for delivery apps.</p>
+
+    <h2>A worked example</h2>
+    <p>Take a classic beef burger with fries:</p>
+    <table>
+      <thead><tr><th>Item</th><th class="num">Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Beef patty, 180 g</td><td class="num">$2.40</td></tr>
+        <tr><td>Brioche bun</td><td class="num">$0.85</td></tr>
+        <tr><td>Cheese, lettuce, tomato, pickles, sauce</td><td class="num">$0.95</td></tr>
+        <tr><td>Fries, 150 g</td><td class="num">$0.55</td></tr>
+        <tr><td>Waste allowance at 5%</td><td class="num">$0.24</td></tr>
+        <tr class="hl"><td>Plate cost</td><td class="num">$4.99</td></tr>
+      </tbody>
+    </table>
+    <p>At 30% food cost that's $16.63 before tax. In New Zealand, adding 15% GST gives $19.12, which rounds to a menu price of $19.00 or $19.50. At $19.50 the real food cost works out to 29.4% and you keep $11.97 per burger before overheads.</p>
+    <p>Now put it on a delivery app at 30% commission with $0.60 of packaging. Because the commission is taken on the GST-inclusive price, the app price needs to be about $31 to keep the same $11.97. List it at the dine-in $19.50 instead and you keep about $5.50, less than half of what the same burger earns in the dining room.</p>
+
+    <h2>What food cost percentage should you target?</h2>
+    <p>For a full-service restaurant, the overall target is usually 28–35% of food sales. That's an average across the menu, not a rule for every dish. Some items carry the margin and others bring people in:</p>
+    <table>
+      <thead><tr><th>Item type</th><th class="num">Typical food cost</th></tr></thead>
+      <tbody>
+        <tr><td>Pasta, pizza, rice and noodle dishes</td><td class="num">20–25%</td></tr>
+        <tr><td>Desserts</td><td class="num">20–28%</td></tr>
+        <tr><td>Burgers, chicken, most mains</td><td class="num">28–33%</td></tr>
+        <tr><td>Steak and seafood</td><td class="num">35–40%</td></tr>
+        <tr><td>Espresso coffee</td><td class="num">12–20%</td></tr>
+      </tbody>
+    </table>
+    <p>If you want the full breakdown of where your overall numbers should sit, the <a href="/">restaurant profit calculator</a> benchmarks food, labour and prime cost from a week of figures.</p>
+
+    <h2>Why the percentage isn't the whole story</h2>
+    <p>Food cost percentage is the right starting point, but the bank only takes dollars. A $42 steak at 38% food cost leaves $26 in gross profit. A $22 pasta at 22% leaves $17. The steak looks worse on paper and earns more per plate.</p>
+    <p>So use the target to set a first price, then check the profit per plate column. If a high-percentage dish still earns more dollars than your average main, it's pulling its weight. If a low-percentage dish only earns a few dollars, it's probably underpriced, however good the percentage looks.</p>
+
+    <h2>Mistakes that make menu prices wrong</h2>
+    <ul>
+      <li><strong>Costing the recipe, not the plate.</strong> Garnish, sauces, the butter on the bread and the oil in the fryer all count. That's what the waste allowance is for.</li>
+      <li><strong>Calculating food cost on the tax-inclusive price.</strong> GST and VAT aren't your money. A dish at $23 including 15% GST is really a $20 sale.</li>
+      <li><strong>Using last year's supplier prices.</strong> Re-cost your top ten sellers every quarter, or whenever a key ingredient moves more than 10%.</li>
+      <li><strong>One price for every channel.</strong> Delivery commission comes off the top, so the same price earns far less.</li>
+      <li><strong>Pricing off the place down the road.</strong> Their rent, wages and portions aren't yours. Check competitors once you know your own number, not before.</li>
+    </ul>
+    <p>For the full approach to pricing a menu, including anchoring, menu layout and when to raise prices, read <a href="/blog/how-to-price-menu-items">how to price menu items</a>. If the calculator shows your food cost is running high, <a href="/blog/how-to-reduce-restaurant-food-cost">this guide to reducing food cost</a> covers the practical fixes.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>What is the formula for menu pricing?</h3>
+    <p>Menu price = plate cost ÷ target food cost %. A dish costing $4.50 at a 30% target sells for $15.00 before tax.</p>
+    <h3>What's the difference between food cost % and markup?</h3>
+    <p>They're the same relationship seen from opposite ends. A 30% food cost is a 3.33× markup on cost; 25% is 4×. Markup is easier to say in the kitchen, but food cost % is what shows up on your P&amp;L.</p>
+    <h3>Should I include GST or sales tax?</h3>
+    <p>Calculate on the price excluding tax, then add the tax on top if your menu has to show tax-inclusive prices, as in New Zealand and Australia.</p>
+    <h3>How much more should I charge on delivery apps?</h3>
+    <p>To keep the same dollar profit after a 30% commission and packaging, delivery prices usually need to be 40–60% higher than dine-in. Most operators settle lower and accept a smaller margin. Use the delivery section above to see what that costs you.</p>
+    <h3>How often should I re-cost the menu?</h3>
+    <p>Re-cost your best sellers at least quarterly, and immediately when a major ingredient changes price. A $2/kg rise on beef mince can take a point or more off your margin on every burger you sell.</p>
+
+    <div class="related">
+      <p>Related</p>
+      <ul>
+        <li><a href="/">Restaurant profit calculator: food, labour and prime cost from a week of figures</a></li>
+        <li><a href="/blog/what-is-a-good-restaurant-profit-margin">What is a good restaurant profit margin?</a></li>
+        <li><a href="/blog/restaurant-beverage-profit-margins">Restaurant beverage profit margins</a></li>
+      </ul>
+    </div>
+
+    <p class="byline">Written by <a href="/about">Terry McDonnell</a>, chartered accountant and former restaurant and franchise owner. Results are indicative only.</p>
+  </div>
+</article>
+</main>
+
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  Results are indicative only. Always consult a qualified accountant for formal financial advice.<br>
+  <a href="/">Calculator</a> · <a href="/menu-price-calculator">Menu price calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<script>
+(function(){
+  var defaults = [
+    ['Beef patty, 180 g', 2.40],
+    ['Brioche bun', 0.85],
+    ['Cheese, salad, pickles, sauce', 0.95],
+    ['Fries, 150 g', 0.55]
+  ];
+  var list = document.getElementById('ingredients');
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(id){ var v = parseFloat($(id).value); return isFinite(v) ? v : 0; };
+  var money = function(v){ return '$' + (isFinite(v) ? v : 0).toFixed(2); };
+  var pct = function(v){ return (isFinite(v) ? v : 0).toFixed(1) + '%'; };
+
+  function addRow(name, cost){
+    var row = document.createElement('div');
+    row.className = 'ing-row';
+    row.innerHTML =
+      '<input type="text" placeholder="Ingredient" aria-label="Ingredient name">' +
+      '<div class="prefix"><span>$</span><input type="number" min="0" step="0.05" placeholder="0.00" aria-label="Cost per portion"></div>' +
+      '<button type="button" aria-label="Remove ingredient">×</button>';
+    row.querySelector('input[type=text]').value = name || '';
+    if (cost != null) row.querySelector('input[type=number]').value = cost.toFixed(2);
+    row.querySelector('button').onclick = function(){ row.remove(); calc(); };
+    row.querySelector('input[type=number]').addEventListener('input', calc);
+    list.appendChild(row);
+  }
+
+  function round(price, mode){
+    if (mode === 'none' || price <= 0) return price;
+    if (mode === '0.9') { var r = Math.ceil(price - 0.9) + 0.9; return r < price - 0.001 ? r + 1 : r; }
+    var step = parseFloat(mode);
+    return Math.ceil(price / step - 1e-9) * step;
+  }
+
+  function calc(){
+    var raw = 0;
+    list.querySelectorAll('input[type=number]').forEach(function(i){ var v = parseFloat(i.value); if (isFinite(v)) raw += v; });
+    var waste = num('waste') / 100;
+    var plate = raw * (1 + waste);
+    var target = num('target') / 100;
+    var tax = num('tax') / 100;
+    var mode = $('rounding').value;
+
+    $('plateCost').textContent = money(plate);
+
+    if (plate <= 0 || target <= 0) {
+      $('priceMenu').textContent = '$0.00';
+      $('priceSub').textContent = 'Add ingredient costs to see a price';
+      return;
+    }
+
+    var exTax = plate / target;
+    var menu = round(exTax * (1 + tax), mode);
+    var exTaxRounded = menu / (1 + tax);
+    var gp = exTaxRounded - plate;
+    var fc = plate / exTaxRounded * 100;
+
+    $('priceMenu').textContent = money(menu);
+    $('priceSub').textContent = tax > 0
+      ? money(exTaxRounded) + ' ex tax + ' + money(menu - exTaxRounded) + ' tax'
+      : 'Before any sales tax';
+    $('gp').textContent = money(gp);
+    $('actualFc').textContent = pct(fc);
+    $('markup').textContent = (exTaxRounded / plate).toFixed(2) + '×';
+
+    // ladder
+    var rows = '';
+    [22, 25, 28, 30, 32, 35, 38].forEach(function(t){
+      var ex = plate / (t / 100);
+      var m = round(ex * (1 + tax), mode);
+      var exR = m / (1 + tax);
+      var hl = Math.abs(t - target * 100) < 0.01 ? ' class="hl"' : '';
+      rows += '<tr' + hl + '><td>' + t + '%</td><td class="num">' + money(exR) + '</td><td class="num">' + money(m) + '</td><td class="num">' + money(exR - plate) + '</td></tr>';
+    });
+    $('ladder').innerHTML = rows;
+
+    // current price check
+    var cur = num('current');
+    var v = $('currentVerdict');
+    if (cur > 0) {
+      var curEx = cur / (1 + tax);
+      var curFc = plate / curEx * 100;
+      var curGp = curEx - plate;
+      var gap = menu - cur;
+      v.style.display = 'block';
+      if (curFc <= target * 100 + 0.5) {
+        v.className = 'verdict good';
+        v.textContent = 'At ' + money(cur) + ' your food cost is ' + pct(curFc) + ', on or under target. You keep ' + money(curGp) + ' per plate.';
+      } else if (curFc <= target * 100 + 5) {
+        v.className = 'verdict warn';
+        v.textContent = 'At ' + money(cur) + ' your food cost is ' + pct(curFc) + ', above your ' + pct(target * 100) + ' target. Moving to ' + money(menu) + ' would add ' + money(gp - curGp) + ' profit to every plate sold.';
+      } else {
+        v.className = 'verdict bad';
+        v.textContent = 'At ' + money(cur) + ' your food cost is ' + pct(curFc) + '. Against your target this dish is ' + money(gap) + ' underpriced, and you keep only ' + money(curGp) + ' per plate.';
+      }
+    } else {
+      v.style.display = 'none';
+    }
+
+    // delivery
+    var c = num('commission') / 100;
+    var pack = num('packaging');
+    $('dGpLbl').textContent = money(gp);
+    if (c >= 1) { $('priceDelivery').textContent = '—'; return; }
+    // Commission is charged on the tax-inclusive price; tax is still owed on the full price.
+    // Net to you ex tax = P/(1+tax) - c*P ; need = plate + pack + gp
+    var need = plate + pack + gp;
+    var denom = 1 / (1 + tax) - c;
+    if (denom <= 0) { $('priceDelivery').textContent = '—'; $('deliveryNote').textContent = 'Commission too high to recover at any price.'; return; }
+    var dPrice = round(need / denom, mode);
+    $('priceDelivery').textContent = money(dPrice);
+    $('deliveryUplift').textContent = '+' + ((dPrice / menu - 1) * 100).toFixed(0) + '% vs dine-in';
+    var atMenuNet = menu / (1 + tax) - c * menu - plate - pack;
+    $('deliveryNote').textContent = 'Listed at the dine-in price of ' + money(menu) + ', you would keep ' + money(atMenuNet) + ' per order instead of ' + money(gp) + '.';
+  }
+
+  defaults.forEach(function(d){ addRow(d[0], d[1]); });
+  $('addIng').onclick = function(){ addRow('', null); list.lastChild.querySelector('input').focus(); };
+  ['waste','target','tax','rounding','current','commission','packaging'].forEach(function(id){
+    $(id).addEventListener('input', calc);
+    $(id).addEventListener('change', calc);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
