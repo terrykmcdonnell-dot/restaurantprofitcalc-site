@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Engineering Calculator: Stars, Plough Horses &amp; Dogs</title>
+<meta name="description" content="Enter each dish's sales, cost and price. See which are Stars, Plough horses, Puzzles and Dogs on a menu engineering matrix, with what to do about each one. Free.">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/menu-engineering-calculator">
+<meta property="og:title" content="Menu Engineering Calculator: Stars, Plough Horses &amp; Dogs">
+<meta property="og:description" content="Classify every dish by popularity and profit, see it on a matrix, and get an action for each. Free, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Menu Engineering Calculator",
+  "url": "https://www.restaurantprofitcalc.com/menu-engineering-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Classify menu items as Stars, Plough horses, Puzzles and Dogs using sales mix and contribution margin.",
+  "author": { "@type": "Person", "name": "Terry McDonnell", "url": "https://www.restaurantprofitcalc.com/about" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is menu engineering?","acceptedAnswer":{"@type":"Answer","text":"Menu engineering sorts every dish by two measures: how popular it is (its share of items sold) and how profitable it is (its contribution margin, price minus food cost). Dishes are then classed as Stars, Plough horses, Puzzles or Dogs, each with a different action."}},
+    {"@type":"Question","name":"How is popularity measured in menu engineering?","acceptedAnswer":{"@type":"Answer","text":"A dish counts as popular if its share of sales is at least 70% of an equal share. With 10 dishes an equal share is 10%, so any dish with 7% or more of sales is popular."}},
+    {"@type":"Question","name":"What should I do with Dogs on my menu?","acceptedAnswer":{"@type":"Answer","text":"Remove them, replace them, or rework them, unless they serve a purpose such as a vegetarian or children's option, in which case reduce their cost and keep them low on the page."}},
+    {"@type":"Question","name":"What is the difference between a Plough horse and a Puzzle?","acceptedAnswer":{"@type":"Answer","text":"A Plough horse sells well but earns less than average per plate, so the fix is price or cost. A Puzzle earns well but doesn't sell, so the fix is visibility, description or staff recommendation."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--surface3:#ece8e1;
+  --border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);
+  --text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;
+  --rust:#b84c2a;--rust-light:#fdf0ec;--rust-dim:rgba(184,76,42,0.1);
+  --green:#1a5e38;--green-light:#eaf5ef;--amber:#92520a;--amber-light:#fef4e6;
+  --red:#b91c1c;--red-light:#fef2f2;--radius:8px;--radius-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px}
+.logo:hover{text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:900px){.nav-links{gap:18px}.nav-links a.hide-sm{display:none}}@media(max-width:700px){.nav-links{display:none}}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 48px;text-align:center}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.5px;margin:0 auto 14px;max-width:680px}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.65}
+
+.calc{padding:40px 0}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.calc-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:18px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;margin-bottom:5px}
+.hint{font-size:11px;color:var(--hint);margin-top:3px;line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=number],input[type=text],select{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--border-med);border-radius:var(--radius);background:var(--surface);color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--rust-dim);border-color:var(--rust)}
+.prefix{position:relative}
+.prefix span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.prefix input{padding-left:24px}
+.suffix{position:relative}
+.suffix span{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.suffix input{padding-right:28px}
+
+.ing-row{display:grid;grid-template-columns:1fr 110px 32px;gap:8px;margin-bottom:8px}
+.ing-row button{border:1px solid var(--border-med);background:var(--surface);border-radius:var(--radius);cursor:pointer;color:var(--hint);font-size:16px}
+.ing-row button:hover{color:var(--red);border-color:var(--red)}
+.add-btn{font:inherit;font-size:13px;color:var(--rust);background:var(--rust-light);border:none;border-radius:var(--radius);padding:7px 12px;cursor:pointer;margin-top:4px}
+.add-btn:hover{background:var(--rust-dim)}
+.subtotal{display:flex;justify-content:space-between;font-size:14px;padding-top:12px;margin-top:12px;border-top:1px solid var(--border)}
+.subtotal strong{font-weight:600}
+
+.result-hero{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:14px;color:#fff;text-align:center}
+.result-hero .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.result-hero .big{font-family:'Playfair Display',serif;font-size:48px;line-height:1.1;margin:6px 0 4px}
+.result-hero .sub{font-size:13px;opacity:.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.stat .v{font-size:20px;font-weight:600}
+.stat .l{font-size:11px;color:var(--hint)}
+.verdict{border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-bottom:14px}
+.verdict.good{background:var(--green-light);color:var(--green)}
+.verdict.warn{background:var(--amber-light);color:var(--amber)}
+.verdict.bad{background:var(--red-light);color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border)}
+th{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--hint)}
+td.num,th.num{text-align:right}
+tr.hl td{background:var(--rust-light);font-weight:600}
+
+.content{padding:16px 0 56px}
+.content .inner{max-width:720px;margin:0 auto}
+.content h2{font-family:'Playfair Display',serif;font-weight:400;font-size:26px;line-height:1.2;margin:40px 0 12px}
+.content h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.content p{font-size:16px;margin-bottom:14px}
+.content ul{margin:0 0 14px 20px;font-size:16px}
+.content li{margin-bottom:6px}
+.formula{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--rust);border-radius:var(--radius);padding:14px 16px;font-size:16px;margin:0 0 16px}
+.content table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.content td,.content th{padding:10px 12px}
+.related{background:var(--surface2);border-radius:var(--radius-lg);padding:20px 22px;margin-top:36px}
+.related p{margin-bottom:8px;font-weight:600}
+.related ul{margin-bottom:0}
+.byline{font-size:13px;color:var(--hint);margin-top:28px}
+
+footer{border-top:1px solid var(--border);background:var(--surface);padding:28px 24px;text-align:center;font-size:13px;color:var(--hint);line-height:1.8}
+</style>
+<style>
+.calc-wide{display:block}
+.me-table{width:100%;border-collapse:collapse;font-size:14px}
+.me-table th{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--hint);padding:6px 4px;text-align:left;border-bottom:1px solid var(--border)}
+.me-table td{padding:5px 4px;border-bottom:1px solid var(--border);vertical-align:middle}
+.me-table input{padding:7px 8px;font-size:14px}
+.me-table .prefix input{padding-left:20px}
+.me-table .prefix span{left:8px}
+.me-table td.num,.me-table th.num{text-align:right}
+.me-table button.rm{border:1px solid var(--border-med);background:var(--surface);border-radius:var(--radius);cursor:pointer;color:var(--hint);width:30px;height:32px}
+.me-table button.rm:hover{color:var(--red);border-color:var(--red)}
+.col-name{width:30%}.col-sold{width:13%}.col-cost{width:14%}.col-price{width:14%}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:12px;white-space:nowrap}
+.tag.star{background:var(--green-light);color:var(--green)}
+.tag.plough{background:var(--amber-light);color:var(--amber)}
+.tag.puzzle{background:#eef2fb;color:#2a4a8a}
+.tag.dog{background:var(--red-light);color:var(--red)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ghost{font:inherit;font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--border-med);border-radius:var(--radius);padding:7px 12px;cursor:pointer}
+.ghost:hover{border-color:var(--text)}
+textarea{width:100%;min-height:120px;font:inherit;font-size:13px;padding:10px;border:1px solid var(--border-med);border-radius:var(--radius);margin-top:10px}
+.paste-box{display:none;margin-top:12px}
+.paste-box.open{display:block}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+@media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}}
+.matrix-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.matrix-grid{grid-template-columns:1fr}}
+.chart svg{width:100%;height:auto;display:block}
+.quad{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.actions h4{font-size:14px;font-weight:600;margin:0 0 4px}
+.actions p{font-size:13px;margin:0 0 4px;color:var(--hint)}
+.actions .items{font-size:13px;margin-bottom:14px}
+.scroll-x{overflow-x:auto}
+@media(max-width:600px){.me-table{min-width:540px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links">
+      <a href="/">Calculator</a>
+      <a href="/menu-price-calculator">Menu pricing</a>
+      <a href="/break-even-calculator">Break-even</a>
+      <a href="/pour-cost-calculator">Pour cost</a>
+      <a href="#calculator">Menu engineering</a>
+      <a href="/blog/" class="hide-sm">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Free menu engineering calculator</div>
+  <h1>Which dishes are earning their place on the menu?</h1>
+  <p>Enter how many of each dish you sold, what it costs and what you charge. Every item is sorted into Stars, Plough horses, Puzzles and Dogs, with what to do about each.</p>
+</header>
+
+<main>
+<section class="calc" id="calculator">
+  <div class="container">
+
+    <div class="card">
+      <div class="card-title">1. Your dishes</div>
+      <div class="hint" style="margin:-10px 0 12px">Use one category at a time (mains, or starters) and one sales period, e.g. the last four weeks. Prices excluding GST or sales tax.</div>
+      <div class="scroll-x">
+        <table class="me-table">
+          <thead><tr><th class="col-name">Dish</th><th class="col-sold num">Number sold</th><th class="col-cost num">Food cost / plate</th><th class="col-price num">Price ex tax</th><th class="num">Profit / plate</th><th>Class</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="toolbar">
+        <button class="add-btn" type="button" id="addRow" style="margin:0">+ Add dish</button>
+        <button class="ghost" type="button" id="pasteToggle">Paste from a spreadsheet</button>
+        <button class="ghost" type="button" id="clearAll">Clear all</button>
+      </div>
+      <div class="paste-box" id="pasteBox">
+        <div class="hint">Copy four columns from Excel or Google Sheets, in this order: dish, number sold, food cost per plate, price ex tax. Paste below and press Load.</div>
+        <textarea id="pasteArea" placeholder="Fish and chips	210	7.20	28.00"></textarea>
+        <div class="toolbar"><button class="add-btn" type="button" id="pasteLoad" style="margin:0">Load these dishes</button></div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="stat"><div class="v" id="sItems">0</div><div class="l">Items sold</div></div>
+      <div class="stat"><div class="v" id="sAvgCm">$0.00</div><div class="l">Average profit / plate</div></div>
+      <div class="stat"><div class="v" id="sThresh">0%</div><div class="l">Popularity threshold</div></div>
+      <div class="stat"><div class="v" id="sFc">0%</div><div class="l">Food cost for this menu</div></div>
+    </div>
+
+    <div class="matrix-grid">
+      <div class="card chart">
+        <div class="card-title">2. The matrix</div>
+        <div id="chart"></div>
+        <div class="hint" style="margin-top:6px">Dots are sized by total profit earned. Lines mark the popularity threshold and the average profit per plate.</div>
+      </div>
+      <div class="card actions">
+        <div class="card-title">3. What to do</div>
+        <h4><span class="tag star">Stars</span></h4>
+        <p>Popular and above-average profit. Keep the recipe and portion exactly as they are, give them the best spot on the menu, and test a small price rise.</p>
+        <div class="items" id="aStar"></div>
+        <h4><span class="tag plough">Plough horses</span></h4>
+        <p>Popular but below-average profit. Raise the price a little, trim the plate cost, or pair them with a high-margin side.</p>
+        <div class="items" id="aPlough"></div>
+        <h4><span class="tag puzzle">Puzzles</span></h4>
+        <p>Good profit but they don't sell. Move them up the page, rewrite the description, have staff recommend them, or try a lower price.</p>
+        <div class="items" id="aPuzzle"></div>
+        <h4><span class="tag dog">Dogs</span></h4>
+        <p>Unpopular and below-average profit. Remove or replace them, unless they cover a need such as a vegetarian or children's option.</p>
+        <div class="items" id="aDog"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<article class="content">
+  <div class="inner">
+
+    <h2>How menu engineering works</h2>
+    <p>Food cost percentage tells you how efficient a dish is. Menu engineering asks a more useful question: which dishes actually bring in the money, and which are just taking up space? It sorts every item by two measures.</p>
+    <ul>
+      <li><strong>Profit per plate</strong> (contribution margin): the selling price before tax minus the food cost. A dish is high-profit if it earns more per plate than the menu's average, weighted by how many of each you sell.</li>
+      <li><strong>Popularity</strong> (menu mix): the dish's share of all items sold in the category. A dish is popular if its share is at least 70% of an equal share. With 8 mains an equal share is 12.5%, so anything over 8.75% counts as popular.</li>
+    </ul>
+    <p>The 70% rule comes from the original menu engineering method developed by Michael Kasavana and Donald Smith in the 1980s, and it's still the standard. It stops a long menu from making nearly everything look unpopular.</p>
+
+    <h2>The four categories</h2>
+    <table>
+      <thead><tr><th></th><th>High profit per plate</th><th>Low profit per plate</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Popular</strong></td><td><span class="tag star">Star</span> Protect and promote</td><td><span class="tag plough">Plough horse</span> Reprice or re-cost</td></tr>
+        <tr><td><strong>Unpopular</strong></td><td><span class="tag puzzle">Puzzle</span> Reposition and sell</td><td><span class="tag dog">Dog</span> Remove or replace</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A worked example</h2>
+    <p>The calculator opens with eight mains from a four-week period in a mid-sized bistro. 830 mains were sold, the weighted average profit per plate is $20.34, and with eight dishes the popularity threshold is 8.75% of sales.</p>
+    <ul>
+      <li><strong>Stars:</strong> fish and chips (210 sold, $20.80 a plate) and steak frites (95 sold, $25.50). Leave them alone and put them where the eye lands first.</li>
+      <li><strong>Plough horses:</strong> the chicken burger (180 sold, $18.10) and Caesar salad (120 sold, $16.40). Fifty cents on the burger price, or fifty cents off its plate cost, adds about $90 a month with no extra work.</li>
+      <li><strong>Puzzles:</strong> pork belly ($25.80) and lamb shanks ($24.20) earn more per plate than almost anything else, but only 55 and 40 sell. Move them up the page and have staff recommend them before touching the price.</li>
+      <li><strong>Dogs:</strong> mushroom risotto and seafood linguine. The risotto is the only vegetarian main, so it stays, costed tightly and placed low. The linguine misses on both measures by a whisker: a small price rise or a sharper description could tip it into Puzzle or Star.</li>
+    </ul>
+    <p>Change the numbers to your own and the picture will be different. That's the point.</p>
+
+    <h2>Getting reliable results</h2>
+    <ul>
+      <li><strong>Compare like with like.</strong> Run mains, starters and desserts separately. A $12 dessert will never out-earn a $40 main, and putting them together makes every dessert look like a Dog.</li>
+      <li><strong>Use a decent sales period.</strong> Four to eight weeks smooths out weather, events and one big booking. Your POS can export the item sales report.</li>
+      <li><strong>Get the plate costs right.</strong> The whole exercise rests on them. If you haven't costed a dish recently, the <a href="/menu-price-calculator">menu price calculator</a> will do it in a couple of minutes.</li>
+      <li><strong>Use prices excluding tax.</strong> GST and sales tax aren't profit.</li>
+      <li><strong>Change one thing at a time.</strong> Reprice a Plough horse or move a Puzzle, then re-run the numbers after the next period. If you change everything at once you won't know what worked.</li>
+    </ul>
+
+    <h2>Mistakes to avoid</h2>
+    <ul>
+      <li><strong>Cutting every Dog.</strong> Some dishes are on the menu for a reason: the vegetarian main, the children's option, the dish a regular orders every Friday. Keep them, cost them tightly, and don't give them prime space.</li>
+      <li><strong>Judging dishes by food cost % alone.</strong> A steak at 39% food cost can be a Star while a pasta at 22% is a Dog. Profit per plate is what pays the rent.</li>
+      <li><strong>Over-pricing your Stars.</strong> Small, regular rises are fine. A big jump on the dish people come for can turn a Star into a Puzzle.</li>
+      <li><strong>Running it once.</strong> Menus drift. Supplier prices move and tastes change. Re-run it every time you reprint the menu, or at least twice a year.</li>
+    </ul>
+    <p>For the bigger picture on where food cost goes, read <a href="/blog/how-to-reduce-restaurant-food-cost">how to reduce your restaurant food cost percentage</a>. For pricing tactics once you know which dishes to move, see <a href="/blog/how-to-price-menu-items">how to price menu items</a>.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>What is menu engineering?</h3>
+    <p>A method of sorting every dish by popularity and profit per plate, then acting on each group differently: promote Stars, reprice Plough horses, reposition Puzzles and remove Dogs.</p>
+    <h3>How is the popularity threshold calculated?</h3>
+    <p>Divide 100% by the number of dishes, then take 70% of that. With 10 dishes the threshold is 7% of items sold.</p>
+    <h3>How is the average profit per plate calculated?</h3>
+    <p>Total profit across all dishes divided by the total number sold. It's weighted, so a dish that sells 200 a month counts more than one that sells 20.</p>
+    <h3>Can I use this for drinks?</h3>
+    <p>Yes. Run cocktails, wines by the glass or beers as their own group. The <a href="/pour-cost-calculator">pour cost calculator</a> will give you the cost per drink.</p>
+    <h3>How often should I do menu engineering?</h3>
+    <p>Every time you change the menu, and at least twice a year. It takes about twenty minutes once you have the item sales report.</p>
+
+    <div class="related">
+      <p>Related</p>
+      <ul>
+        <li><a href="/">Restaurant profit calculator: food, labour and prime cost from a week of figures</a></li>
+        <li><a href="/menu-price-calculator">Menu price calculator</a></li>
+        <li><a href="/break-even-calculator">Restaurant break-even calculator</a></li>
+        <li><a href="/pour-cost-calculator">Bar pour cost calculator</a></li>
+      </ul>
+    </div>
+
+    <p class="byline">Written by <a href="/about">Terry McDonnell</a>, chartered accountant and former restaurant and franchise owner. Results are indicative only.</p>
+  </div>
+</article>
+</main>
+
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  Results are indicative only. Always consult a qualified accountant for formal financial advice.<br>
+  <a href="/">Calculator</a> · <a href="/menu-price-calculator">Menu price calculator</a> · <a href="/break-even-calculator">Break-even calculator</a> · <a href="/pour-cost-calculator">Pour cost calculator</a> · <a href="/menu-engineering-calculator">Menu engineering calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var money = function(v){ return (v < 0 ? '−$' : '$') + Math.abs(isFinite(v) ? v : 0).toFixed(2); };
+  var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var CLASS = {
+    star:   {label:'Star', col:'#1a5e38'},
+    plough: {label:'Plough horse', col:'#92520a'},
+    puzzle: {label:'Puzzle', col:'#2a4a8a'},
+    dog:    {label:'Dog', col:'#b91c1c'}
+  };
+  var defaults = [
+    ['Fish and chips', 210, 7.20, 28],
+    ['Steak frites', 95, 16.50, 42],
+    ['Chicken burger', 180, 5.90, 24],
+    ['Mushroom risotto', 60, 4.10, 22],
+    ['Lamb shanks', 40, 11.80, 36],
+    ['Caesar salad', 120, 4.60, 21],
+    ['Pork belly', 55, 8.20, 34],
+    ['Seafood linguine', 70, 9.90, 30]
+  ];
+  var body = $('rows');
+
+  function addRow(d){
+    d = d || ['', '', '', ''];
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><input type="text" aria-label="Dish name" placeholder="Dish"></td>' +
+      '<td><input type="number" min="0" step="1" aria-label="Number sold" style="text-align:right"></td>' +
+      '<td><div class="prefix"><span>$</span><input type="number" min="0" step="0.05" aria-label="Food cost per plate" style="text-align:right"></div></td>' +
+      '<td><div class="prefix"><span>$</span><input type="number" min="0" step="0.5" aria-label="Price excluding tax" style="text-align:right"></div></td>' +
+      '<td class="num cm"></td><td class="cls"></td>' +
+      '<td><button type="button" class="rm" aria-label="Remove dish">×</button></td>';
+    var ins = tr.querySelectorAll('input');
+    ins[0].value = d[0];
+    if (d[1] !== '') ins[1].value = d[1];
+    if (d[2] !== '') ins[2].value = Number(d[2]).toFixed(2);
+    if (d[3] !== '') ins[3].value = Number(d[3]).toFixed(2);
+    ins.forEach(function(i){ i.addEventListener('input', calc); });
+    tr.querySelector('.rm').onclick = function(){ tr.remove(); calc(); };
+    body.appendChild(tr);
+  }
+
+  function read(){
+    var out = [];
+    body.querySelectorAll('tr').forEach(function(tr){
+      var ins = tr.querySelectorAll('input');
+      var sold = parseFloat(ins[1].value), cost = parseFloat(ins[2].value), price = parseFloat(ins[3].value);
+      out.push({tr:tr, name: ins[0].value.trim() || 'Untitled', sold: isFinite(sold) ? sold : 0, cost: isFinite(cost) ? cost : 0, price: isFinite(price) ? price : 0,
+        valid: isFinite(sold) && sold >= 0 && isFinite(price) && price > 0 && isFinite(cost)});
+    });
+    return out;
+  }
+
+  function calc(){
+    var all = read();
+    var items = all.filter(function(d){ return d.valid; });
+    all.forEach(function(d){ d.tr.querySelector('.cm').textContent = d.valid ? money(d.price - d.cost) : ''; d.tr.querySelector('.cls').innerHTML = ''; });
+
+    var n = items.length;
+    var totalSold = items.reduce(function(a, d){ return a + d.sold; }, 0);
+    var totalCm = items.reduce(function(a, d){ return a + (d.price - d.cost) * d.sold; }, 0);
+    var totalRev = items.reduce(function(a, d){ return a + d.price * d.sold; }, 0);
+    var totalCost = items.reduce(function(a, d){ return a + d.cost * d.sold; }, 0);
+    var avgCm = totalSold > 0 ? totalCm / totalSold : 0;
+    var thresh = n > 0 ? 0.7 / n : 0;
+
+    $('sItems').textContent = totalSold.toLocaleString('en-US');
+    $('sAvgCm').textContent = money(avgCm);
+    $('sThresh').textContent = parseFloat((thresh * 100).toFixed(2)) + '%';
+    $('sFc').textContent = totalRev > 0 ? (totalCost / totalRev * 100).toFixed(1) + '%' : '—';
+
+    var groups = {star:[], plough:[], puzzle:[], dog:[]};
+    items.forEach(function(d){
+      d.mix = totalSold > 0 ? d.sold / totalSold : 0;
+      d.cm = d.price - d.cost;
+      var pop = d.mix >= thresh, prof = d.cm >= avgCm;
+      d.cls = pop && prof ? 'star' : pop ? 'plough' : prof ? 'puzzle' : 'dog';
+      groups[d.cls].push(d);
+      if (totalSold > 0 && n >= 2) d.tr.querySelector('.cls').innerHTML = '<span class="tag ' + d.cls + '">' + CLASS[d.cls].label + '</span>';
+    });
+
+    var ids = {star:'aStar', plough:'aPlough', puzzle:'aPuzzle', dog:'aDog'};
+    Object.keys(groups).forEach(function(k){
+      var g = groups[k].sort(function(a, b){ return b.cm * b.sold - a.cm * a.sold; });
+      $(ids[k]).innerHTML = (n >= 2 && totalSold > 0)
+        ? (g.length ? g.map(function(d){ return '<strong>' + esc(d.name) + '</strong> (' + Math.round(d.sold) + ' sold, ' + money(d.cm) + ')'; }).join(' · ') : '<span style="color:var(--hint)">None</span>')
+        : '';
+    });
+
+    drawChart(items, avgCm, thresh, n >= 2 && totalSold > 0);
+  }
+
+  function drawChart(items, avgCm, thresh, ok){
+    var W = 560, H = 400, L = 54, R = 16, T = 16, B = 44;
+    var el = $('chart');
+    if (!ok) { el.innerHTML = '<p class="hint">Add at least two dishes with sales and prices to see the matrix.</p>'; return; }
+    var maxMix = Math.max.apply(null, items.map(function(d){ return d.mix; }).concat([thresh])) * 1.15;
+    var cms = items.map(function(d){ return d.cm; }).concat([avgCm]);
+    var minCm = Math.min.apply(null, cms), maxCm = Math.max.apply(null, cms);
+    var pad = (maxCm - minCm) * 0.15 || 2;
+    minCm = Math.max(0, minCm - pad); maxCm = maxCm + pad;
+    if (Math.min.apply(null, items.map(function(d){ return d.cm; })) < 0) minCm = Math.min.apply(null, items.map(function(d){ return d.cm; })) - pad;
+    var x = function(v){ return L + v / maxMix * (W - L - R); };
+    var y = function(v){ return T + (1 - (v - minCm) / (maxCm - minCm)) * (H - T - B); };
+    var maxTot = Math.max.apply(null, items.map(function(d){ return Math.max(d.cm * d.sold, 0); })) || 1;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Menu engineering matrix">';
+    var tx = x(thresh), ty = y(avgCm);
+    s += '<rect x="' + tx + '" y="' + T + '" width="' + (W - R - tx) + '" height="' + (ty - T) + '" fill="#eaf5ef"/>';
+    s += '<rect x="' + L + '" y="' + T + '" width="' + (tx - L) + '" height="' + (ty - T) + '" fill="#eef2fb"/>';
+    s += '<rect x="' + tx + '" y="' + ty + '" width="' + (W - R - tx) + '" height="' + (H - B - ty) + '" fill="#fef4e6"/>';
+    s += '<rect x="' + L + '" y="' + ty + '" width="' + (tx - L) + '" height="' + (H - B - ty) + '" fill="#fef2f2"/>';
+    s += '<line x1="' + tx + '" x2="' + tx + '" y1="' + T + '" y2="' + (H - B) + '" stroke="#5a554f" stroke-dasharray="4 4"/>';
+    s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + ty + '" y2="' + ty + '" stroke="#5a554f" stroke-dasharray="4 4"/>';
+    s += '<text class="quad" x="' + (W - R - 6) + '" y="' + (T + 14) + '" text-anchor="end" fill="#1a5e38">Stars</text>';
+    s += '<text class="quad" x="' + (L + 6) + '" y="' + (T + 14) + '" fill="#2a4a8a">Puzzles</text>';
+    s += '<text class="quad" x="' + (W - R - 6) + '" y="' + (H - B - 8) + '" text-anchor="end" fill="#92520a">Plough horses</text>';
+    s += '<text class="quad" x="' + (L + 6) + '" y="' + (H - B - 8) + '" fill="#b91c1c">Dogs</text>';
+    s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - B) + '" y2="' + (H - B) + '" stroke="rgba(0,0,0,.25)"/>';
+    s += '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(0,0,0,.25)"/>';
+    for (var i = 0; i <= 4; i++) {
+      var mv = maxMix * i / 4, cv = minCm + (maxCm - minCm) * i / 4;
+      s += '<text x="' + x(mv) + '" y="' + (H - B + 16) + '" font-size="11" text-anchor="middle" fill="#5a554f">' + Math.round(mv * 100) + '%</text>';
+      s += '<text x="' + (L - 6) + '" y="' + (y(cv) + 4) + '" font-size="11" text-anchor="end" fill="#5a554f">$' + Math.round(cv) + '</text>';
+    }
+    s += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 6) + '" font-size="12" text-anchor="middle" fill="#1c1a17">Share of items sold (popularity)</text>';
+    s += '<text transform="translate(14 ' + ((T + H - B) / 2) + ') rotate(-90)" font-size="12" text-anchor="middle" fill="#1c1a17">Profit per plate</text>';
+    items.slice().sort(function(a, b){ return b.cm * b.sold - a.cm * a.sold; }).forEach(function(d){
+      var r = 5 + 11 * Math.sqrt(Math.max(d.cm * d.sold, 0) / maxTot);
+      var cx = x(d.mix), cy = y(d.cm);
+      var anchor = cx > W - 140 ? 'end' : 'start';
+      var lx = anchor === 'end' ? cx - r - 4 : cx + r + 4;
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + CLASS[d.cls].col + '" fill-opacity=".8" stroke="#fff" stroke-width="1.5"><title>' + esc(d.name) + ': ' + (d.mix * 100).toFixed(1) + '% of sales, ' + money(d.cm) + ' per plate</title></circle>';
+      s += '<text x="' + lx + '" y="' + (cy + 4) + '" font-size="11" text-anchor="' + anchor + '" fill="#1c1a17">' + esc(d.name.length > 22 ? d.name.slice(0, 21) + '…' : d.name) + '</text>';
+    });
+    s += '</svg>';
+    el.innerHTML = s;
+  }
+
+  function parsePaste(text){
+    var rows = [];
+    text.split(/\r?\n/).forEach(function(line){
+      if (!line.trim()) return;
+      var p = line.split(/\t|,(?=\s*[\d$])/).map(function(x){ return x.trim().replace(/^\$/, ''); });
+      if (p.length < 4) return;
+      var nums = p.slice(1, 4).map(function(x){ return parseFloat(x.replace(/[$,]/g, '')); });
+      if (nums.some(function(v){ return !isFinite(v); })) return;
+      rows.push([p[0], nums[0], nums[1], nums[2]]);
+    });
+    return rows;
+  }
+
+  defaults.forEach(addRow);
+  $('addRow').onclick = function(){ addRow(); body.lastChild.querySelector('input').focus(); };
+  $('clearAll').onclick = function(){ body.innerHTML = ''; addRow(); addRow(); calc(); };
+  $('pasteToggle').onclick = function(){ $('pasteBox').classList.toggle('open'); };
+  $('pasteLoad').onclick = function(){
+    var rows = parsePaste($('pasteArea').value);
+    if (!rows.length) { $('pasteArea').focus(); return; }
+    body.innerHTML = '';
+    rows.forEach(addRow);
+    $('pasteBox').classList.remove('open');
+    calc();
+  };
+  calc();
+})();
+</script>
+</body>
+</html>
