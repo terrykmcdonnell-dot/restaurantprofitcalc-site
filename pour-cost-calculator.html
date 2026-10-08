@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bar Pour Cost Calculator: Spirits, Wine, Beer &amp; Cocktails</title>
+<meta name="description" content="Work out pour cost %, profit per drink and the price you need for spirits, wine by the glass, draught beer and cocktails, plus what over-pouring costs you a year.">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/pour-cost-calculator">
+<meta property="og:title" content="Bar Pour Cost Calculator: Spirits, Wine, Beer &amp; Cocktails">
+<meta property="og:description" content="Pour cost %, profit per drink, target pricing and the annual cost of over-pouring. Free, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bar Pour Cost Calculator",
+  "url": "https://www.restaurantprofitcalc.com/pour-cost-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate pour cost percentage, profit per drink and target drink prices for spirits, wine, draught beer and cocktails.",
+  "author": { "@type": "Person", "name": "Terry McDonnell", "url": "https://www.restaurantprofitcalc.com/about" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How do you calculate pour cost?","acceptedAnswer":{"@type":"Answer","text":"Pour cost % = cost of the liquor in the drink ÷ selling price (excluding tax) × 100. A 30ml pour from a $38, 700ml bottle costs $1.63. Add $0.40 of mixer and garnish and a $12 drink (ex tax) has a pour cost of about 17%."}},
+    {"@type":"Question","name":"What is a good pour cost percentage?","acceptedAnswer":{"@type":"Answer","text":"Typical targets are 15–20% for spirits, 20–25% for draught beer, 20–28% for wine by the glass and 30–40% for bottled wine. A blended bar pour cost of 18–25% is a well-run beverage program."}},
+    {"@type":"Question","name":"How much does over-pouring cost a bar?","acceptedAnswer":{"@type":"Answer","text":"A 30ml spirit poured by eye often comes out at 35–40ml, 15–30% over. On a drink with a 17% pour cost that adds three to five points and can cost thousands of dollars a year on a few hundred drinks a week."}},
+    {"@type":"Question","name":"How many glasses of wine are in a bottle?","acceptedAnswer":{"@type":"Answer","text":"A 750ml bottle gives five 150ml glasses or about four and a half 175ml glasses. Poured generously it gives four, which raises the cost per glass by a quarter."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--surface3:#ece8e1;
+  --border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);
+  --text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;
+  --rust:#b84c2a;--rust-light:#fdf0ec;--rust-dim:rgba(184,76,42,0.1);
+  --green:#1a5e38;--green-light:#eaf5ef;--amber:#92520a;--amber-light:#fef4e6;
+  --red:#b91c1c;--red-light:#fef2f2;--radius:8px;--radius-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px}
+.logo:hover{text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:640px){.nav-links{gap:16px}.nav-links a.hide-sm{display:none}}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 48px;text-align:center}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.5px;margin:0 auto 14px;max-width:680px}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.65}
+
+.calc{padding:40px 0}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.calc-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:18px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;margin-bottom:5px}
+.hint{font-size:11px;color:var(--hint);margin-top:3px;line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=number],input[type=text],select{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--border-med);border-radius:var(--radius);background:var(--surface);color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--rust-dim);border-color:var(--rust)}
+.prefix{position:relative}
+.prefix span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.prefix input{padding-left:24px}
+.suffix{position:relative}
+.suffix span{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.suffix input{padding-right:28px}
+
+.ing-row{display:grid;grid-template-columns:1fr 110px 32px;gap:8px;margin-bottom:8px}
+.ing-row button{border:1px solid var(--border-med);background:var(--surface);border-radius:var(--radius);cursor:pointer;color:var(--hint);font-size:16px}
+.ing-row button:hover{color:var(--red);border-color:var(--red)}
+.add-btn{font:inherit;font-size:13px;color:var(--rust);background:var(--rust-light);border:none;border-radius:var(--radius);padding:7px 12px;cursor:pointer;margin-top:4px}
+.add-btn:hover{background:var(--rust-dim)}
+.subtotal{display:flex;justify-content:space-between;font-size:14px;padding-top:12px;margin-top:12px;border-top:1px solid var(--border)}
+.subtotal strong{font-weight:600}
+
+.result-hero{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:14px;color:#fff;text-align:center}
+.result-hero .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.result-hero .big{font-family:'Playfair Display',serif;font-size:48px;line-height:1.1;margin:6px 0 4px}
+.result-hero .sub{font-size:13px;opacity:.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.stat .v{font-size:20px;font-weight:600}
+.stat .l{font-size:11px;color:var(--hint)}
+.verdict{border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-bottom:14px}
+.verdict.good{background:var(--green-light);color:var(--green)}
+.verdict.warn{background:var(--amber-light);color:var(--amber)}
+.verdict.bad{background:var(--red-light);color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border)}
+th{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--hint)}
+td.num,th.num{text-align:right}
+tr.hl td{background:var(--rust-light);font-weight:600}
+
+.content{padding:16px 0 56px}
+.content .inner{max-width:720px;margin:0 auto}
+.content h2{font-family:'Playfair Display',serif;font-weight:400;font-size:26px;line-height:1.2;margin:40px 0 12px}
+.content h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.content p{font-size:16px;margin-bottom:14px}
+.content ul{margin:0 0 14px 20px;font-size:16px}
+.content li{margin-bottom:6px}
+.formula{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--rust);border-radius:var(--radius);padding:14px 16px;font-size:16px;margin:0 0 16px}
+.content table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.content td,.content th{padding:10px 12px}
+.related{background:var(--surface2);border-radius:var(--radius-lg);padding:20px 22px;margin-top:36px}
+.related p{margin-bottom:8px;font-weight:600}
+.related ul{margin-bottom:0}
+.byline{font-size:13px;color:var(--hint);margin-top:28px}
+
+footer{border-top:1px solid var(--border);background:var(--surface);padding:28px 24px;text-align:center;font-size:13px;color:var(--hint);line-height:1.8}
+</style>
+<style>
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--border-med);background:var(--surface);color:var(--text);border-radius:20px;padding:6px 14px;cursor:pointer}
+.presets button.on{background:var(--rust);border-color:var(--rust);color:#fff}
+.ing-head,.liq-row{display:grid;grid-template-columns:1fr 92px 84px 76px 30px;gap:6px;align-items:center}
+.ing-head{font-size:11px;color:var(--hint);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.liq-row{margin-bottom:8px}
+.liq-row input{padding:8px 8px;font-size:14px}
+.liq-row .prefix input{padding-left:20px}
+.liq-row .prefix span{left:8px}
+.liq-row button{border:1px solid var(--border-med);background:var(--surface);border-radius:var(--radius);cursor:pointer;color:var(--hint);height:36px}
+.liq-row button:hover{color:var(--red);border-color:var(--red)}
+@media(max-width:520px){.ing-head,.liq-row{grid-template-columns:1fr 1fr 1fr 30px}.ing-head span:first-child{display:none}.liq-row input[type=text]{grid-column:1/-1}.liq-row{padding-bottom:8px;border-bottom:1px solid var(--border)}}
+.unit-toggle{display:inline-flex;border:1px solid var(--border-med);border-radius:20px;overflow:hidden;font-size:12px;float:right}
+.unit-toggle button{font:inherit;border:none;background:var(--surface);padding:4px 12px;cursor:pointer;color:var(--hint)}
+.unit-toggle button.on{background:var(--text);color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links">
+      <a href="/">Calculator</a>
+      <a href="/menu-price-calculator">Menu pricing</a>
+      <a href="/break-even-calculator">Break-even</a>
+      <a href="#calculator">Pour cost</a>
+      <a href="/blog/" class="hide-sm">Blog</a>
+      <a href="/about" class="hide-sm">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Free bar pour cost calculator</div>
+  <h1>What is each drink really costing you?</h1>
+  <p>Pour cost, profit per drink and the right price for spirits, wine by the glass, draught beer and cocktails, plus what a heavy hand on the pour adds up to over a year.</p>
+</header>
+
+<main>
+<section class="calc" id="calculator">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- INPUTS -->
+      <div>
+        <div class="card">
+          <div class="card-title">1. The drink
+            <span class="unit-toggle" role="group" aria-label="Units"><button type="button" id="uMl" class="on">ml</button><button type="button" id="uOz">fl oz</button></span>
+          </div>
+          <div class="presets" id="presets">
+            <button type="button" data-p="spirit" class="on">Spirit &amp; mixer</button>
+            <button type="button" data-p="wine">Wine by the glass</button>
+            <button type="button" data-p="beer">Draught beer</button>
+            <button type="button" data-p="cocktail">Cocktail</button>
+            <button type="button" data-p="na">Non-alcoholic</button>
+          </div>
+          <div class="ing-head"><span>Product</span><span>Bottle / keg cost</span><span id="hSize">Size (ml)</span><span id="hUsed">Used (ml)</span><span></span></div>
+          <div id="rows"></div>
+          <button class="add-btn" type="button" id="addRow">+ Add product</button>
+          <div class="row2" style="margin-top:16px">
+            <div class="field">
+              <label for="extras">Mixer, garnish, ice</label>
+              <div class="prefix"><span>$</span><input type="number" id="extras" min="0" step="0.05"></div>
+            </div>
+            <div class="field">
+              <label for="waste">Spillage / line loss</label>
+              <div class="suffix"><input type="number" id="waste" min="0" max="50" step="0.5"><span>%</span></div>
+            </div>
+          </div>
+          <div class="subtotal"><span>Cost per drink</span><strong id="costDrink">$0.00</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. Price and targets</div>
+          <div class="row2">
+            <div class="field">
+              <label for="price">Menu price</label>
+              <div class="prefix"><span>$</span><input type="number" id="price" min="0" step="0.5"></div>
+            </div>
+            <div class="field">
+              <label for="tax">Tax included in price</label>
+              <div class="suffix"><input type="number" id="tax" value="0" min="0" max="30" step="0.5"><span>%</span></div>
+            </div>
+          </div>
+          <div class="hint" style="margin:-6px 0 14px">15 for NZ GST, 10 for Australian GST, 20 for UK VAT. Leave at 0 if your prices exclude tax.</div>
+          <div class="field">
+            <label for="target">Target pour cost</label>
+            <div class="suffix"><input type="number" id="target" min="5" max="80" step="0.5"><span>%</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. The over-pour test</div>
+          <div class="row2">
+            <div class="field">
+              <label for="over">Pours run over by</label>
+              <div class="suffix"><input type="number" id="over" value="15" min="0" max="100" step="1"><span>%</span></div>
+              <div class="hint">A 30ml pour that comes out at 35ml is about 15% over.</div>
+            </div>
+            <div class="field">
+              <label for="weekly">Drinks sold per week</label>
+              <input type="number" id="weekly" value="300" min="0" step="10">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="result-hero">
+          <div class="lbl">Pour cost</div>
+          <div class="big" id="pc">0%</div>
+          <div class="sub" id="pcSub">&nbsp;</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="v" id="profit">$0.00</div><div class="l">Profit per drink</div></div>
+          <div class="stat"><div class="v" id="serves">0</div><div class="l" id="servesLbl">Drinks per bottle</div></div>
+          <div class="stat"><div class="v" id="perBottle">$0</div><div class="l">Profit per bottle</div></div>
+        </div>
+
+        <div class="verdict" id="verdict"></div>
+
+        <div class="card">
+          <div class="card-title">Price to hit your target</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-family:'Playfair Display',serif;font-size:32px" id="targetPrice">$0.00</span>
+            <span style="font-size:13px;color:var(--hint)" id="targetNote"></span>
+          </div>
+          <table style="margin-top:12px">
+            <thead><tr><th>Pour cost</th><th class="num">Menu price</th><th class="num">Profit / drink</th></tr></thead>
+            <tbody id="ladder"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">What over-pouring costs</div>
+          <table>
+            <tbody>
+              <tr><td>Pour cost with over-pour</td><td class="num" id="opPc"></td></tr>
+              <tr><td>Profit lost per drink</td><td class="num" id="opDrink"></td></tr>
+              <tr><td id="opServesLbl">Drinks per bottle</td><td class="num" id="opServes"></td></tr>
+              <tr class="hl"><td>Profit lost per year</td><td class="num" id="opYear"></td></tr>
+            </tbody>
+          </table>
+          <div class="hint" style="margin-top:8px">Jiggers or measured pourers usually pay for themselves in the first week.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<article class="content">
+  <div class="inner">
+
+    <h2>How pour cost is calculated</h2>
+    <p>Pour cost is the bar's version of food cost: what the liquid in the glass cost you, as a share of what you sold it for.</p>
+    <div class="formula"><strong>Pour cost % = cost of the drink ÷ selling price (ex tax) × 100</strong></div>
+    <p>The cost of the drink is the bottle cost divided by the bottle size, times the amount poured, plus any mixer, garnish or juice. For draught beer it's the keg cost spread over the serves you actually get out of the keg after line cleaning and foam, which is why the calculator includes a loss allowance.</p>
+
+    <h2>A worked example</h2>
+    <p>The calculator opens on a vodka and tonic. A 700ml bottle costs $38, so each millilitre costs about 5.4 cents and a 30ml pour costs $1.63. Add $0.40 for tonic, lime and ice and the drink costs $2.03 to make.</p>
+    <p>At $12 before tax, that's a pour cost of 16.9% and $9.97 profit per drink. The bottle gives 23 pours, so it earns about $230 in profit before it's empty.</p>
+    <p>Now let the pour run 15% over, a 34–35ml pour instead of 30ml. The drink now costs $2.27, pour cost rises to 19%, the bottle gives 20 drinks instead of 23, and you lose 24 cents on every drink. At 300 drinks a week that's about $3,800 a year, for nothing anyone can see.</p>
+
+    <h2>Pour cost targets by drink type</h2>
+    <table>
+      <thead><tr><th>Category</th><th class="num">Target pour cost</th></tr></thead>
+      <tbody>
+        <tr><td>Spirits</td><td class="num">15–20%</td></tr>
+        <tr><td>Draught beer</td><td class="num">20–25%</td></tr>
+        <tr><td>Wine by the glass</td><td class="num">20–28%</td></tr>
+        <tr><td>Cocktails</td><td class="num">18–24%</td></tr>
+        <tr><td>Bottled wine</td><td class="num">30–40%</td></tr>
+        <tr><td>Coffee</td><td class="num">12–18%</td></tr>
+        <tr><td>Soft drinks and house sodas</td><td class="num">10–15%</td></tr>
+      </tbody>
+    </table>
+    <p>A well-run beverage program blends out at 18–25%, about ten points better than food. That's why moving part of a table's spend from food to drinks lifts profit without adding covers. Our guide to <a href="/blog/restaurant-beverage-profit-margins">restaurant beverage profit margins</a> covers the full picture.</p>
+
+    <h2>Percentage versus dollars</h2>
+    <p>Pour cost percentage is the right tool for catching waste and theft. It's the wrong tool for deciding what to sell. A bottle of wine costing $18 and selling for $52 has a 35% pour cost, the worst in the table, and still puts $34 in the till in one transaction with almost no labour. A $13 glass at 24% returns around $9.</p>
+    <p>Use the percentage to spot problems, and the profit per drink and profit per bottle to decide what your staff should recommend. The same applies to food. The <a href="/menu-price-calculator">menu price calculator</a> shows both for each dish.</p>
+
+    <h2>Where pour cost leaks</h2>
+    <ul>
+      <li><strong>Free pouring.</strong> Measured by eye, a 30ml pour routinely comes out at 35–40ml. Jiggers or measured pourers close it immediately.</li>
+      <li><strong>Wine by the glass yield.</strong> A 750ml bottle should give five 150ml glasses. Poured generously it gives four, and cost per glass rises by a quarter.</li>
+      <li><strong>Draught line losses.</strong> Line cleaning, foaming and settling all use real volume. Compare kegs bought against pints sold each month; 5–8% loss is normal, more is training or gas pressure.</li>
+      <li><strong>Unrecorded comps and staff drinks.</strong> Fine as a deliberate decision. As an unexplained gap in the stocktake, it looks like a pour cost problem.</li>
+      <li><strong>Old bottle prices.</strong> Supplier increases creep in a few percent at a time. Re-cost your top sellers every quarter.</li>
+    </ul>
+    <p>The only way to know your real bar pour cost is a regular stocktake. <a href="/blog/do-restaurants-need-stocktakes">Do restaurants need stocktakes?</a> explains how to do it without losing a Sunday.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>How do you calculate pour cost?</h3>
+    <p>Divide the cost of what's in the glass by the selling price excluding tax. A $2.03 vodka and tonic sold for $12 has a pour cost of 16.9%.</p>
+    <h3>What is a good pour cost percentage for a bar?</h3>
+    <p>15–20% for spirits, 20–25% for draught beer and 20–28% for wine by the glass. Blended across the bar, 18–25% is a well-run program.</p>
+    <h3>How do I price a cocktail?</h3>
+    <p>Add up the cost of every ingredient at the amount used, plus garnish, then divide by your target pour cost. A cocktail costing $3.60 to make at a 20% target needs to sell for $18 before tax.</p>
+    <h3>How many standard pours are in a bottle?</h3>
+    <p>A 700ml bottle gives 23 30ml pours; a 750ml bottle gives 25 30ml pours or 16 1.5oz pours; a litre bottle gives 33 30ml pours, before any spillage.</p>
+    <h3>Should I use fl oz or ml?</h3>
+    <p>Whichever your bottles and jiggers use. Pour cost depends only on the share of the bottle in each drink, so the result is the same either way. The toggle at the top of the calculator switches the labels and examples.</p>
+
+    <div class="related">
+      <p>Related</p>
+      <ul>
+        <li><a href="/">Restaurant profit calculator: food, labour and prime cost from a week of figures</a></li>
+        <li><a href="/menu-price-calculator">Menu price calculator</a></li>
+        <li><a href="/break-even-calculator">Restaurant break-even calculator</a></li>
+        <li><a href="/blog/restaurant-beverage-profit-margins">Beverage margins: the most underused lever in restaurant profit</a></li>
+      </ul>
+    </div>
+
+    <p class="byline">Written by <a href="/about">Terry McDonnell</a>, chartered accountant and former restaurant and franchise owner. Results are indicative only.</p>
+  </div>
+</article>
+</main>
+
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  Results are indicative only. Always consult a qualified accountant for formal financial advice.<br>
+  <a href="/">Calculator</a> · <a href="/menu-price-calculator">Menu price calculator</a> · <a href="/break-even-calculator">Break-even calculator</a> · <a href="/pour-cost-calculator">Pour cost calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(el){ var v = parseFloat(typeof el === 'string' ? $(el).value : el.value); return isFinite(v) ? v : 0; };
+  var money = function(v){ return (v < 0 ? '−$' : '$') + Math.abs(isFinite(v) ? v : 0).toFixed(2); };
+  var m0 = function(v){ return (v < 0 ? '−$' : '$') + Math.round(Math.abs(v)).toLocaleString('en-US'); };
+  var pct = function(v){ return (isFinite(v) ? v : 0).toFixed(1) + '%'; };
+  var unit = 'ml';
+
+  var PRESETS = {
+    ml: {
+      spirit:   {rows:[['Vodka', 38, 700, 30]], extras:0.40, waste:0, price:12, target:18, vessel:'bottle'},
+      wine:     {rows:[['House white', 16, 750, 150]], extras:0, waste:0, price:13, target:25, vessel:'bottle'},
+      beer:     {rows:[['Lager keg, 50 L', 260, 50000, 425]], extras:0, waste:6, price:11, target:22, vessel:'keg'},
+      cocktail: {rows:[['Gin', 45, 700, 45], ['Orange liqueur', 55, 700, 15]], extras:0.60, waste:0, price:22, target:20, vessel:'bottle'},
+      na:       {rows:[['House syrup', 12, 750, 40]], extras:0.50, waste:0, price:10, target:15, vessel:'bottle'}
+    },
+    oz: {
+      spirit:   {rows:[['Vodka', 30, 25.4, 1.5]], extras:0.40, waste:0, price:12, target:18, vessel:'bottle'},
+      wine:     {rows:[['House white', 14, 25.4, 5]], extras:0, waste:0, price:12, target:25, vessel:'bottle'},
+      beer:     {rows:[['Lager keg, ½ barrel', 180, 1984, 16]], extras:0, waste:6, price:7, target:22, vessel:'keg'},
+      cocktail: {rows:[['Gin', 32, 25.4, 2], ['Orange liqueur', 40, 25.4, 0.5]], extras:0.60, waste:0, price:18, target:20, vessel:'bottle'},
+      na:       {rows:[['House syrup', 10, 25.4, 1.25]], extras:0.50, waste:0, price:8, target:15, vessel:'bottle'}
+    }
+  };
+  var current = 'spirit';
+  var vessel = 'bottle';
+  var list = $('rows');
+
+  function addRow(name, cost, size, used){
+    var r = document.createElement('div');
+    r.className = 'liq-row';
+    r.innerHTML =
+      '<input type="text" aria-label="Product name" placeholder="Product">' +
+      '<div class="prefix"><span>$</span><input type="number" min="0" step="0.5" aria-label="Bottle or keg cost"></div>' +
+      '<input type="number" min="0" step="any" aria-label="Bottle or keg size">' +
+      '<input type="number" min="0" step="any" aria-label="Amount used per drink">' +
+      '<button type="button" aria-label="Remove product">×</button>';
+    var ins = r.querySelectorAll('input');
+    ins[0].value = name || '';
+    if (cost != null) ins[1].value = cost;
+    if (size != null) ins[2].value = size;
+    if (used != null) ins[3].value = used;
+    for (var i = 1; i < 4; i++) ins[i].addEventListener('input', calc);
+    r.querySelector('button').onclick = function(){ r.remove(); calc(); };
+    list.appendChild(r);
+  }
+
+  function load(key){
+    current = key;
+    var p = PRESETS[unit][key];
+    vessel = p.vessel;
+    list.innerHTML = '';
+    p.rows.forEach(function(x){ addRow(x[0], x[1], x[2], x[3]); });
+    $('extras').value = p.extras.toFixed(2);
+    $('waste').value = p.waste;
+    $('price').value = p.price;
+    $('target').value = p.target;
+    document.querySelectorAll('#presets button').forEach(function(b){ b.classList.toggle('on', b.dataset.p === key); });
+    calc();
+  }
+
+  function setUnit(u){
+    unit = u;
+    $('uMl').classList.toggle('on', u === 'ml');
+    $('uOz').classList.toggle('on', u === 'oz');
+    var lbl = u === 'ml' ? 'ml' : 'fl oz';
+    $('hSize').textContent = 'Size (' + lbl + ')';
+    $('hUsed').textContent = 'Used (' + lbl + ')';
+    load(current);
+  }
+
+  function rowsData(){
+    var out = [];
+    list.querySelectorAll('.liq-row').forEach(function(r){
+      var ins = r.querySelectorAll('input');
+      var cost = num(ins[1]), size = num(ins[2]), used = num(ins[3]);
+      if (size > 0) out.push({cost:cost, size:size, used:used});
+    });
+    return out;
+  }
+
+  function roundUp(p){ return Math.ceil(p * 2 - 1e-9) / 2; }
+
+  function calc(){
+    var rows = rowsData();
+    var waste = num('waste') / 100;
+    var extras = num('extras');
+    var tax = num('tax') / 100;
+    var price = num('price');
+    var target = num('target') / 100;
+    var over = num('over') / 100;
+    var weekly = num('weekly');
+
+    var liquid = rows.reduce(function(a, r){ return a + r.cost / r.size * r.used; }, 0);
+    var cost = liquid * (1 + waste) + extras;
+    var priceEx = price / (1 + tax);
+    $('costDrink').textContent = money(cost);
+
+    var main = rows[0];
+    var serves = main && main.used > 0 ? main.size / (main.used * (1 + waste)) : 0;
+    $('servesLbl').textContent = 'Drinks per ' + vessel;
+    $('opServesLbl').textContent = 'Drinks per ' + vessel + ' when over-poured';
+
+    if (priceEx <= 0 || cost <= 0) {
+      $('pc').textContent = '—';
+      $('pcSub').textContent = 'Enter a cost and a menu price';
+      $('verdict').style.display = 'none';
+      return;
+    }
+
+    var pc = cost / priceEx * 100;
+    var profit = priceEx - cost;
+    $('pc').textContent = pct(pc);
+    $('pcSub').textContent = money(cost) + ' cost on ' + money(priceEx) + (tax > 0 ? ' ex tax' : '');
+    $('profit').textContent = money(profit);
+    $('serves').textContent = serves ? Math.floor(serves).toLocaleString('en-US') : '—';
+    $('perBottle').textContent = serves ? m0(profit * Math.floor(serves)) : '—';
+
+    var v = $('verdict');
+    v.style.display = 'block';
+    var t = target * 100;
+    if (pc < t - 0.5) { v.className = 'verdict good'; v.textContent = 'Better than target: ' + pct(pc) + ' against your ' + pct(t) + ' goal.'; }
+    else if (pc <= t + 0.5) { v.className = 'verdict good'; v.textContent = 'On target: ' + pct(pc) + ' against your ' + pct(t) + ' goal.'; }
+    else if (pc <= t + 5) { v.className = 'verdict warn'; v.textContent = pct(pc - t).replace('%', ' points') + ' over your ' + pct(t) + ' target. Check the price, the pour and the bottle cost.'; }
+    else { v.className = 'verdict bad'; v.textContent = pct(pc) + ' is well over your ' + pct(t) + ' target. This drink is underpriced or over-poured.'; }
+
+    // target price
+    if (target > 0) {
+      var tp = roundUp(cost / target * (1 + tax));
+      $('targetPrice').textContent = money(tp);
+      var diff = tp - price;
+      $('targetNote').textContent = Math.abs(diff) < 0.01 ? 'Your current price' : (diff > 0 ? money(diff) + ' more than now' : 'Minimum price; yours is ' + money(-diff) + ' above it');
+    }
+    var rowsHtml = '';
+    [15, 18, 20, 22, 25, 28].forEach(function(x){
+      var m = roundUp(cost / (x / 100) * (1 + tax));
+      var hl = Math.abs(x - t) < 0.01 ? ' class="hl"' : '';
+      rowsHtml += '<tr' + hl + '><td>' + x + '%</td><td class="num">' + money(m) + '</td><td class="num">' + money(m / (1 + tax) - cost) + '</td></tr>';
+    });
+    $('ladder').innerHTML = rowsHtml;
+
+    // over-pour
+    var costOver = liquid * (1 + over) * (1 + waste) + extras;
+    var lost = costOver - cost;
+    $('opPc').textContent = pct(costOver / priceEx * 100);
+    $('opDrink').textContent = money(lost);
+    $('opServes').textContent = main && main.used > 0 ? Math.floor(main.size / (main.used * (1 + over) * (1 + waste))) + ' instead of ' + Math.floor(serves) : '—';
+    $('opYear').textContent = m0(lost * weekly * 52);
+  }
+
+  document.querySelectorAll('#presets button').forEach(function(b){ b.onclick = function(){ load(b.dataset.p); }; });
+  $('uMl').onclick = function(){ if (unit !== 'ml') setUnit('ml'); };
+  $('uOz').onclick = function(){ if (unit !== 'oz') setUnit('oz'); };
+  $('addRow').onclick = function(){ addRow('', null, unit === 'ml' ? 700 : 25.4, null); list.lastChild.querySelector('input').focus(); };
+  ['extras','waste','price','tax','target','over','weekly'].forEach(function(id){ $(id).addEventListener('input', calc); });
+  load('spirit');
+})();
+</script>
+</body>
+</html>
