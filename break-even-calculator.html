@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Break-Even Calculator: Sales &amp; Covers You Need</title>
+<meta name="description" content="Enter your fixed costs and variable cost %. See the weekly sales and covers per night you need to break even, your margin of safety, and what a discount really costs.">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/break-even-calculator">
+<meta property="og:title" content="Restaurant Break-Even Calculator: Sales &amp; Covers You Need">
+<meta property="og:description" content="Weekly break-even sales, covers per night, margin of safety and the real cost of discounting. Free, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Restaurant Break-Even Calculator",
+  "url": "https://www.restaurantprofitcalc.com/break-even-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Work out a restaurant's weekly break-even sales and covers per night from fixed costs and variable cost percentage.",
+  "author": { "@type": "Person", "name": "Terry McDonnell", "url": "https://www.restaurantprofitcalc.com/about" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How do you calculate a restaurant's break-even point?","acceptedAnswer":{"@type":"Answer","text":"Break-even sales = fixed costs ÷ contribution margin ratio. The contribution margin ratio is 100% minus your variable costs as a percentage of sales. With fixed costs of $9,500 a week and variable costs of 62%, break-even is $9,500 ÷ 0.38 = $25,000 a week."}},
+    {"@type":"Question","name":"Are wages a fixed or variable cost?","acceptedAnswer":{"@type":"Answer","text":"Both. Salaried staff such as a head chef or manager are fixed. Casual staff rostered up and down with trade are variable. Split the wage bill rather than forcing it into one category."}},
+    {"@type":"Question","name":"Should I include my own wage in break-even?","acceptedAnswer":{"@type":"Answer","text":"Yes. Include a market-rate salary for the work you do. If you leave it out, the business can look like it breaks even while it is actually being subsidised by your unpaid labour."}},
+    {"@type":"Question","name":"How much extra trade do I need to cover a discount?","acceptedAnswer":{"@type":"Answer","text":"At a 38% contribution margin, a 20% discount leaves 18 cents per dollar instead of 38, so you need about 2.1 times the sales, or 111% more covers, just to earn the same contribution."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--surface3:#ece8e1;
+  --border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);
+  --text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;
+  --rust:#b84c2a;--rust-light:#fdf0ec;--rust-dim:rgba(184,76,42,0.1);
+  --green:#1a5e38;--green-light:#eaf5ef;--amber:#92520a;--amber-light:#fef4e6;
+  --red:#b91c1c;--red-light:#fef2f2;--radius:8px;--radius-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px}
+.logo:hover{text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:640px){.nav-links{gap:16px}.nav-links a.hide-sm{display:none}}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 48px;text-align:center}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.5px;margin:0 auto 14px;max-width:680px}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.65}
+
+.calc{padding:40px 0}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.calc-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:18px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;margin-bottom:5px}
+.hint{font-size:11px;color:var(--hint);margin-top:3px;line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=number],input[type=text],select{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--border-med);border-radius:var(--radius);background:var(--surface);color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--rust-dim);border-color:var(--rust)}
+.prefix{position:relative}
+.prefix span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.prefix input{padding-left:24px}
+.suffix{position:relative}
+.suffix span{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.suffix input{padding-right:28px}
+
+.ing-row{display:grid;grid-template-columns:1fr 110px 32px;gap:8px;margin-bottom:8px}
+.ing-row button{border:1px solid var(--border-med);background:var(--surface);border-radius:var(--radius);cursor:pointer;color:var(--hint);font-size:16px}
+.ing-row button:hover{color:var(--red);border-color:var(--red)}
+.add-btn{font:inherit;font-size:13px;color:var(--rust);background:var(--rust-light);border:none;border-radius:var(--radius);padding:7px 12px;cursor:pointer;margin-top:4px}
+.add-btn:hover{background:var(--rust-dim)}
+.subtotal{display:flex;justify-content:space-between;font-size:14px;padding-top:12px;margin-top:12px;border-top:1px solid var(--border)}
+.subtotal strong{font-weight:600}
+
+.result-hero{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:14px;color:#fff;text-align:center}
+.result-hero .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.result-hero .big{font-family:'Playfair Display',serif;font-size:48px;line-height:1.1;margin:6px 0 4px}
+.result-hero .sub{font-size:13px;opacity:.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.stat .v{font-size:20px;font-weight:600}
+.stat .l{font-size:11px;color:var(--hint)}
+.verdict{border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-bottom:14px}
+.verdict.good{background:var(--green-light);color:var(--green)}
+.verdict.warn{background:var(--amber-light);color:var(--amber)}
+.verdict.bad{background:var(--red-light);color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border)}
+th{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--hint)}
+td.num,th.num{text-align:right}
+tr.hl td{background:var(--rust-light);font-weight:600}
+
+.content{padding:16px 0 56px}
+.content .inner{max-width:720px;margin:0 auto}
+.content h2{font-family:'Playfair Display',serif;font-weight:400;font-size:26px;line-height:1.2;margin:40px 0 12px}
+.content h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.content p{font-size:16px;margin-bottom:14px}
+.content ul{margin:0 0 14px 20px;font-size:16px}
+.content li{margin-bottom:6px}
+.formula{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--rust);border-radius:var(--radius);padding:14px 16px;font-size:16px;margin:0 0 16px}
+.content table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.content td,.content th{padding:10px 12px}
+.related{background:var(--surface2);border-radius:var(--radius-lg);padding:20px 22px;margin-top:36px}
+.related p{margin-bottom:8px;font-weight:600}
+.related ul{margin-bottom:0}
+.byline{font-size:13px;color:var(--hint);margin-top:28px}
+
+footer{border-top:1px solid var(--border);background:var(--surface);padding:28px 24px;text-align:center;font-size:13px;color:var(--hint);line-height:1.8}
+</style>
+<style>
+.cost-row{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin-bottom:8px}
+.cost-row label{font-size:14px}
+.result-hero .split{display:flex;justify-content:center;gap:28px;margin-top:14px;font-size:13px;opacity:.9}
+.result-hero .split strong{display:block;font-size:20px;font-weight:600;opacity:1}
+.bar{height:10px;background:var(--surface3);border-radius:6px;overflow:hidden;margin:10px 0 6px;position:relative}
+.bar span{position:absolute;left:0;top:0;bottom:0;border-radius:6px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links">
+      <a href="/">Calculator</a>
+      <a href="/menu-price-calculator">Menu pricing</a>
+      <a href="#calculator">Break-even</a>
+      <a href="/blog/" class="hide-sm">Blog</a>
+      <a href="/about" class="hide-sm">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Free break-even calculator</div>
+  <h1>How much do you need to take before you keep a dollar?</h1>
+  <p>Split your costs into fixed and variable, and see your break-even in weekly sales and in covers per night, the number your floor staff will recognise.</p>
+</header>
+
+<main>
+<section class="calc" id="calculator">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- INPUTS -->
+      <div>
+        <div class="card">
+          <div class="card-title">1. Fixed costs per week</div>
+          <div class="section-label">Costs that arrive whether you open or not</div>
+          <div class="cost-row"><label for="fRent">Rent and outgoings</label><div class="prefix"><span>$</span><input type="number" id="fRent" value="2500" min="0" step="50"></div></div>
+          <div class="cost-row"><label for="fSalary">Salaried wages (chef, manager)</label><div class="prefix"><span>$</span><input type="number" id="fSalary" value="3800" min="0" step="50"></div></div>
+          <div class="cost-row"><label for="fOwner">Your own wage</label><div class="prefix"><span>$</span><input type="number" id="fOwner" value="1200" min="0" step="50"></div></div>
+          <div class="cost-row"><label for="fUtil">Power, insurance, subscriptions</label><div class="prefix"><span>$</span><input type="number" id="fUtil" value="1000" min="0" step="50"></div></div>
+          <div class="cost-row"><label for="fLoan">Loan and lease repayments</label><div class="prefix"><span>$</span><input type="number" id="fLoan" value="600" min="0" step="50"></div></div>
+          <div class="cost-row"><label for="fOther">Everything else fixed</label><div class="prefix"><span>$</span><input type="number" id="fOther" value="400" min="0" step="50"></div></div>
+          <div class="hint">Monthly figure? Multiply by 12 and divide by 52. Leave out GST/sales tax throughout.</div>
+          <div class="subtotal"><span>Fixed costs per week</span><strong id="fixedTotal">$0</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. Variable costs, as % of sales</div>
+          <div class="section-label">Costs that rise and fall with trade</div>
+          <div class="cost-row"><label for="vFood">Food and beverage cost</label><div class="suffix"><input type="number" id="vFood" value="32" min="0" max="100" step="0.5"><span>%</span></div></div>
+          <div class="cost-row"><label for="vLabour">Casual / rostered wages</label><div class="suffix"><input type="number" id="vLabour" value="26" min="0" max="100" step="0.5"><span>%</span></div></div>
+          <div class="cost-row"><label for="vOther">Card fees, packaging, other</label><div class="suffix"><input type="number" id="vOther" value="4" min="0" max="100" step="0.5"><span>%</span></div></div>
+          <div class="subtotal"><span>Variable costs</span><strong id="varTotal">0%</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. How you trade</div>
+          <div class="row2">
+            <div class="field">
+              <label for="spend">Average spend per head</label>
+              <div class="prefix"><span>$</span><input type="number" id="spend" value="45" min="0" step="0.5"></div>
+            </div>
+            <div class="field">
+              <label for="days">Trading days per week</label>
+              <input type="number" id="days" value="6" min="1" max="7" step="1">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="current">Current weekly sales <span style="color:var(--hint)">(optional)</span></label>
+              <div class="prefix"><span>$</span><input type="number" id="current" value="30000" min="0" step="100"></div>
+            </div>
+            <div class="field">
+              <label for="discount">Test a discount</label>
+              <div class="suffix"><input type="number" id="discount" value="20" min="0" max="90" step="1"><span>%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="result-hero">
+          <div class="lbl">Break-even sales per week</div>
+          <div class="big" id="beWeek">$0</div>
+          <div class="sub" id="beSub">&nbsp;</div>
+          <div class="split">
+            <div><strong id="beDay">$0</strong>per trading day</div>
+            <div><strong id="beCovers">0</strong>covers per day</div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="v" id="cm">0%</div><div class="l">Contribution margin</div></div>
+          <div class="stat"><div class="v" id="beMonth">$0</div><div class="l">Break-even / month</div></div>
+          <div class="stat"><div class="v" id="perFixed">$0</div><div class="l">Sales per $1 of fixed cost</div></div>
+        </div>
+
+        <div class="card" id="currentCard">
+          <div class="card-title">Where you are now</div>
+          <div class="verdict" id="verdict"></div>
+          <div class="bar"><span id="barFill"></span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--hint)"><span>$0</span><span id="barLabel"></span></div>
+          <table style="margin-top:14px">
+            <tbody>
+              <tr><td>Weekly profit (loss) before tax</td><td class="num" id="profitWeek"></td></tr>
+              <tr><td>Annual profit (loss) before tax</td><td class="num" id="profitYear"></td></tr>
+              <tr><td>Margin of safety</td><td class="num" id="safety"></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">If your variable costs move</div>
+          <table>
+            <thead><tr><th>Variable costs</th><th class="num">Break-even / week</th><th class="num">Covers / day</th><th class="num">Change</th></tr></thead>
+            <tbody id="ladder"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">What the discount really costs</div>
+          <p style="font-size:14px" id="discountText"></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<article class="content">
+  <div class="inner">
+
+    <h2>How the break-even formula works</h2>
+    <p>Break-even is the sales figure where your contribution exactly covers your fixed costs. Below it, you're funding the restaurant out of reserves. Above it, every extra dollar of sales keeps its full contribution, because the fixed costs are already paid.</p>
+    <div class="formula"><strong>Break-even sales = fixed costs ÷ (100% − variable cost %)</strong></div>
+    <p>The bottom half of that formula is your contribution margin ratio: what's left of each sales dollar after the costs that move with trade. If food, beverage and casual wages together take 62 cents of every dollar, the other 38 cents goes towards rent, salaries and everything else that arrives regardless.</p>
+
+    <h2>A worked example</h2>
+    <p>The calculator above opens with this example. A restaurant has $9,500 a week in fixed costs: $2,500 rent, $3,800 of salaried wages, $1,200 for the owner, and $2,000 of utilities, insurance, loan repayments and other overheads. Food and beverage run 32% of sales, casual wages 26%, and card fees and packaging another 4%. Variable costs total 62%, so the contribution margin is 38%.</p>
+    <p>$9,500 ÷ 0.38 = <strong>$25,000 a week</strong>. At an average spend of $45 that's about 556 covers a week, or 93 a night across six nights. On $30,000 of actual sales, the restaurant makes $1,900 a week before tax and has a 17% margin of safety. A bad month that drops sales by a sixth would take it straight to zero.</p>
+
+    <h2>Splitting fixed and variable costs</h2>
+    <p>The calculation is simple. Getting the split right is where the judgement is.</p>
+    <ul>
+      <li><strong>Fixed:</strong> rent and outgoings, salaried staff, your own wage, insurance, loan and equipment lease repayments, software subscriptions, accounting fees, the standing charges on utilities.</li>
+      <li><strong>Variable:</strong> food and beverage, casual staff rostered up and down with trade, card and delivery-app fees, packaging, consumables.</li>
+      <li><strong>Labour sits in both.</strong> Your head chef and manager are paid whether you do 40 covers or 140. The extra floor staff on a Saturday aren't. Split the wage bill instead of forcing it into one column.</li>
+    </ul>
+    <p>If you're not sure where your variable costs sit, the <a href="/">restaurant profit calculator</a> works out food and labour as a percentage of sales from a week of figures.</p>
+
+    <h2>Three things break-even tells you that a P&amp;L doesn't</h2>
+    <h3>Whether a quiet night is worth opening</h3>
+    <p>The rent arrives whether you open on Tuesday or not, so the question isn't whether Tuesday made a profit. It's whether Tuesday's sales covered Tuesday's variable costs. If it contributed anything at all towards fixed costs, closing makes you worse off.</p>
+    <h3>What a discount really costs</h3>
+    <p>At a 38% contribution margin, a 20% discount doesn't cost 20% of your profit. It takes 20 cents out of a 38-cent contribution, more than half. To earn the same contribution you'd need roughly twice the covers. The discount box in the calculator shows the exact figure for your numbers.</p>
+    <h3>How much room you have</h3>
+    <p>The gap between your actual sales and break-even is your margin of safety. Seasonal businesses need a much bigger cushion than they think: a 17% margin in summer can disappear in a single slow month. Our guide to <a href="/blog/restaurant-cash-flow-management">restaurant cash flow management</a> covers how to plan for it.</p>
+
+    <h2>Mistakes that make break-even look better than it is</h2>
+    <ul>
+      <li><strong>Leaving out your own wage.</strong> If you're not paying yourself a market rate, the business isn't breaking even. It's being subsidised by you.</li>
+      <li><strong>Using last year's food cost.</strong> If food cost has crept up four points, break-even in the example above rises by nearly $3,000 a week.</li>
+      <li><strong>Forgetting loan repayments.</strong> They aren't an expense on the P&amp;L, but the cash has to come from trading all the same.</li>
+      <li><strong>Including GST or sales tax in sales.</strong> Use sales excluding tax, or break-even will look lower than it is.</li>
+      <li><strong>Calculating it once.</strong> Rent reviews, wage rises and supplier increases all move break-even gradually. Recalculate every six months.</li>
+    </ul>
+    <p>For the full method, including how to read the result, see <a href="/blog/restaurant-break-even-analysis">how to calculate your restaurant's break-even point</a>. If rent is the cost pushing your break-even up, <a href="/blog/restaurant-rent-percentage">what percentage of sales rent should be</a> sets out the benchmarks.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>How do you calculate a restaurant's break-even point?</h3>
+    <p>Divide fixed costs by your contribution margin ratio, which is 100% minus variable costs as a percentage of sales. $9,500 of weekly fixed costs at a 38% margin gives $25,000 a week.</p>
+    <h3>Are wages a fixed or variable cost?</h3>
+    <p>Both. Salaried staff are fixed; casual staff rostered to demand are variable. Split them.</p>
+    <h3>Should I include my own wage?</h3>
+    <p>Yes, at a market rate for the work you do. Otherwise break-even is understated by whatever you're not paying yourself.</p>
+    <h3>What is a good margin of safety for a restaurant?</h3>
+    <p>As a rule of thumb, aim for actual sales at least 20–25% above break-even in your average week. Less than 10% leaves almost no room for a slow month, a rent review or a key staff member leaving.</p>
+    <h3>How does menu pricing affect break-even?</h3>
+    <p>Directly. Lowering food cost from 32% to 29% lifts the contribution margin by three points, which cuts break-even by around $1,800 a week in the example. The <a href="/menu-price-calculator">menu price calculator</a> shows what price each dish needs to hit your target.</p>
+
+    <div class="related">
+      <p>Related</p>
+      <ul>
+        <li><a href="/">Restaurant profit calculator: food, labour and prime cost from a week of figures</a></li>
+        <li><a href="/menu-price-calculator">Menu price calculator</a></li>
+        <li><a href="/blog/restaurant-break-even-analysis">How to calculate your restaurant's break-even point</a></li>
+        <li><a href="/blog/why-restaurants-fail">Why restaurants fail: the financial reasons most owners miss</a></li>
+      </ul>
+    </div>
+
+    <p class="byline">Written by <a href="/about">Terry McDonnell</a>, chartered accountant and former restaurant and franchise owner. Results are indicative only.</p>
+  </div>
+</article>
+</main>
+
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  Results are indicative only. Always consult a qualified accountant for formal financial advice.<br>
+  <a href="/">Calculator</a> · <a href="/menu-price-calculator">Menu price calculator</a> · <a href="/break-even-calculator">Break-even calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(id){ var v = parseFloat($(id).value); return isFinite(v) ? v : 0; };
+  var m0 = function(v){ var s = Math.round(Math.abs(v)).toLocaleString('en-US'); return (v < 0 ? '−$' : '$') + s; };
+  var pct = function(v){ return (Math.round(v * 10) / 10) + '%'; };
+  var fixedIds = ['fRent','fSalary','fOwner','fUtil','fLoan','fOther'];
+  var varIds = ['vFood','vLabour','vOther'];
+
+  function calc(){
+    var fixed = fixedIds.reduce(function(a, id){ return a + num(id); }, 0);
+    var varPct = varIds.reduce(function(a, id){ return a + num(id); }, 0);
+    var cm = (100 - varPct) / 100;
+    var spend = num('spend');
+    var days = Math.max(1, Math.round(num('days')));
+    $('fixedTotal').textContent = m0(fixed);
+    $('varTotal').textContent = pct(varPct);
+
+    if (cm <= 0) {
+      $('beWeek').textContent = 'Never';
+      $('beSub').textContent = 'Variable costs are 100% or more of sales, so every sale loses money.';
+      ['beDay','beCovers','beMonth','perFixed'].forEach(function(id){ $(id).textContent = '—'; });
+      $('cm').textContent = pct(100 - varPct);
+      $('currentCard').style.display = 'none';
+      $('ladder').innerHTML = ''; $('discountText').textContent = '';
+      return;
+    }
+
+    var be = fixed / cm;
+    var beDay = be / days;
+    $('beWeek').textContent = m0(be);
+    $('beSub').textContent = m0(be * 52) + ' a year, excluding tax';
+    $('beDay').textContent = m0(beDay);
+    $('beCovers').textContent = spend > 0 ? Math.ceil(beDay / spend).toLocaleString('en-US') : '—';
+    $('cm').textContent = pct(cm * 100);
+    $('beMonth').textContent = m0(be * 52 / 12);
+    $('perFixed').textContent = '$' + (1 / cm).toFixed(2);
+
+    // current position
+    var cur = num('current');
+    var card = $('currentCard');
+    if (cur > 0) {
+      card.style.display = 'block';
+      var profit = (cur - be) * cm;
+      var safety = (cur - be) / cur * 100;
+      var v = $('verdict');
+      if (cur >= be) {
+        v.className = 'verdict ' + (safety >= 20 ? 'good' : 'warn');
+        v.textContent = 'You are ' + m0(cur - be) + ' a week above break-even. ' +
+          (safety >= 20 ? 'A healthy cushion.' : 'That is a thin cushion: a ' + Math.round(safety) + '% drop in sales takes profit to zero.');
+      } else {
+        v.className = 'verdict bad';
+        v.textContent = 'You are ' + m0(be - cur) + ' a week below break-even, about ' + Math.ceil((be - cur) / days / Math.max(spend, 1)) + ' more covers a day at your average spend.';
+      }
+      var scale = Math.max(cur, be) * 1.1;
+      var fill = $('barFill');
+      fill.style.width = (cur / scale * 100) + '%';
+      fill.style.background = cur >= be ? 'var(--green)' : 'var(--red)';
+      $('barLabel').textContent = 'Break-even ' + m0(be) + ' · You ' + m0(cur);
+      $('profitWeek').textContent = m0(profit);
+      $('profitYear').textContent = m0(profit * 52);
+      $('safety').textContent = cur >= be ? pct(safety) : 'None';
+      $('profitWeek').style.color = $('profitYear').style.color = profit < 0 ? 'var(--red)' : 'var(--text)';
+    } else {
+      card.style.display = 'none';
+    }
+
+    // sensitivity
+    var rows = '';
+    [-4, -2, 0, 2, 4].forEach(function(d){
+      var vp = varPct + d, c = (100 - vp) / 100;
+      if (vp < 0 || c <= 0) return;
+      var b = fixed / c;
+      var hl = d === 0 ? ' class="hl"' : '';
+      var ch = d === 0 ? '—' : (b > be ? '+' : '') + m0(b - be);
+      rows += '<tr' + hl + '><td>' + pct(vp) + (d === 0 ? ' (now)' : '') + '</td><td class="num">' + m0(b) + '</td><td class="num">' +
+        (spend > 0 ? Math.ceil(b / days / spend) : '—') + '</td><td class="num">' + ch + '</td></tr>';
+    });
+    $('ladder').innerHTML = rows;
+
+    // discount
+    var disc = num('discount') / 100;
+    var t = $('discountText');
+    if (disc <= 0) {
+      t.textContent = 'Enter a discount percentage to see how much extra trade it needs.';
+    } else if (disc >= cm) {
+      t.innerHTML = 'A <strong>' + Math.round(disc * 100) + '%</strong> discount is larger than your ' + pct(cm * 100) + ' contribution margin. Every discounted sale loses money before fixed costs, however many covers it brings in.';
+    } else {
+      var mult = cm / (cm - disc);
+      t.innerHTML = 'A <strong>' + Math.round(disc * 100) + '%</strong> discount cuts your contribution from ' + Math.round(cm * 100) + ' cents to ' +
+        Math.round((cm - disc) * 100) + ' cents per dollar of full-price sales. To earn the same contribution you need <strong>' + Math.round((mult - 1) * 100) +
+        '% more covers</strong> on discounted trade' + (spend > 0 ? ', or about ' + Math.round(mult * 10) / 10 + ' discounted customers for every one at full price.' : '.');
+    }
+  }
+
+  fixedIds.concat(varIds, ['spend','days','current','discount']).forEach(function(id){
+    $(id).addEventListener('input', calc);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
