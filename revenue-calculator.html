@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Revenue Calculator: Weekly &amp; Annual Sales from Seats and Covers</title>
+<meta name="description" content="Enter seats, table turns and average spend for lunch and dinner. See weekly and annual revenue, covers, revenue per seat, and what moves the number most. Free, no signup.">
+<link rel="canonical" href="https://www.restaurantprofitcalc.com/revenue-calculator">
+<meta property="og:title" content="Restaurant Revenue Calculator: Weekly &amp; Annual Sales from Seats and Covers">
+<meta property="og:description" content="Weekly and annual revenue from seats, table turns and average spend, plus the levers that grow it. Free, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5659107512429407" crossorigin="anonymous"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Restaurant Revenue Calculator",
+  "url": "https://www.restaurantprofitcalc.com/revenue-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Estimate a restaurant's weekly and annual revenue from seats, table turns, average spend per head and trading days.",
+  "author": { "@type": "Person", "name": "Terry McDonnell", "url": "https://www.restaurantprofitcalc.com/about" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How do you calculate restaurant revenue?","acceptedAnswer":{"@type":"Answer","text":"For each service, multiply seats by table turns by trading days to get covers, then multiply covers by average spend per head. Add the services together, plus any takeaway or delivery sales. A 60-seat restaurant turning its tables 1.2 times at dinner, six nights a week, at $55 a head takes 60 × 1.2 × 6 × $55 = $23,760 a week from dinner."}},
+    {"@type":"Question","name":"What is a table turn?","acceptedAnswer":{"@type":"Answer","text":"A table turn is one full use of your seats in a service. If 60 seats serve 72 guests across a dinner service, that is 1.2 turns. Turns below 1 mean some seats stayed empty all service."}},
+    {"@type":"Question","name":"Which lever increases restaurant revenue fastest?","acceptedAnswer":{"@type":"Answer","text":"It depends on where you are. A busy restaurant that is full at peak usually gains most from lifting average spend or adding a quieter service. A restaurant with empty seats gains most from more covers. The calculator shows the annual effect of each lever on your own numbers."}},
+    {"@type":"Question","name":"Should revenue include GST or sales tax?","acceptedAnswer":{"@type":"Answer","text":"No. Use average spend excluding GST, VAT or sales tax. The tax is collected for the government and is not your revenue, and including it overstates every figure that depends on revenue."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#faf8f5;--surface:#ffffff;--surface2:#f3f0eb;--surface3:#ece8e1;
+  --border:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);
+  --text:#1c1a17;--muted:#1c1a17;--hint:#5a554f;
+  --rust:#b84c2a;--rust-light:#fdf0ec;--rust-dim:rgba(184,76,42,0.1);
+  --green:#1a5e38;--green-light:#eaf5ef;--amber:#92520a;--amber-light:#fef4e6;
+  --red:#b91c1c;--red-light:#fef2f2;--radius:8px;--radius-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);letter-spacing:-.2px}
+.logo:hover{text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:900px){.nav-links{gap:18px}.nav-links a.hide-sm{display:none}}@media(max-width:700px){.nav-links{display:none}}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 48px;text-align:center}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);background:var(--rust-light);padding:4px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.5px;margin:0 auto 14px;max-width:680px}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.65}
+
+.calc{padding:40px 0}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.calc-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;margin-bottom:18px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;margin-bottom:5px}
+.hint{font-size:11px;color:var(--hint);margin-top:3px;line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:420px){.row3{grid-template-columns:1fr 1fr}}
+input[type=number],input[type=text],select{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--border-med);border-radius:var(--radius);background:var(--surface);color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--rust-dim);border-color:var(--rust)}
+.prefix{position:relative}
+.prefix span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:14px;pointer-events:none}
+.prefix input{padding-left:24px}
+.subtotal{display:flex;justify-content:space-between;font-size:14px;padding-top:12px;margin-top:12px;border-top:1px solid var(--border)}
+.subtotal strong{font-weight:600}
+.service-head{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin:4px 0 10px}
+.service + .service{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}
+
+.result-hero{background:var(--text);border-radius:var(--radius-lg);padding:28px 24px;margin-bottom:14px;color:#fff;text-align:center}
+.result-hero .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.result-hero .big{font-family:'Playfair Display',serif;font-size:48px;line-height:1.1;margin:6px 0 4px}
+.result-hero .sub{font-size:13px;opacity:.8}
+.result-hero .split{display:flex;justify-content:center;gap:28px;margin-top:14px;font-size:13px;opacity:.9}
+.result-hero .split strong{display:block;font-size:20px;font-weight:600;opacity:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.stat .v{font-size:20px;font-weight:600}
+.stat .l{font-size:11px;color:var(--hint)}
+.verdict{border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-bottom:14px}
+.verdict.good{background:var(--green-light);color:var(--green)}
+.verdict.warn{background:var(--amber-light);color:var(--amber)}
+.verdict.bad{background:var(--red-light);color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border)}
+th{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--hint)}
+td.num,th.num{text-align:right}
+tr.hl td{background:var(--rust-light);font-weight:600}
+.next-cta{display:block;text-align:center;background:var(--rust);color:#fff;border-radius:var(--radius);padding:12px 14px;font-weight:600;font-size:14px;margin-top:14px}
+.next-cta:hover{text-decoration:none;opacity:.92}
+
+.content{padding:16px 0 56px}
+.content .inner{max-width:720px;margin:0 auto}
+.content h2{font-family:'Playfair Display',serif;font-weight:400;font-size:26px;line-height:1.2;margin:40px 0 12px}
+.content h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.content p{font-size:16px;margin-bottom:14px}
+.content ul{margin:0 0 14px 20px;font-size:16px}
+.content li{margin-bottom:6px}
+.formula{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--rust);border-radius:var(--radius);padding:14px 16px;font-size:16px;margin:0 0 16px}
+.content table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.content td,.content th{padding:10px 12px}
+.related{background:var(--surface2);border-radius:var(--radius-lg);padding:20px 22px;margin-top:36px}
+.related p{margin-bottom:8px;font-weight:600}
+.related ul{margin-bottom:0}
+.byline{font-size:13px;color:var(--hint);margin-top:28px}
+
+footer{border-top:1px solid var(--border);background:var(--surface);padding:28px 24px;text-align:center;font-size:13px;color:var(--hint);line-height:1.8}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">restaurant<span>profit</span>calc</a>
+    <div class="nav-links">
+      <a href="/">Calculator</a>
+      <a href="#calculator">Revenue</a>
+      <a href="/menu-price-calculator">Menu pricing</a>
+      <a href="/break-even-calculator">Break-even</a>
+      <a href="/pour-cost-calculator">Pour cost</a>
+      <a href="/menu-engineering-calculator">Menu engineering</a>
+      <a href="/blog/" class="hide-sm">Blog</a>
+      <a href="/about" class="hide-sm">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Free revenue calculator</div>
+  <h1>How much should your restaurant be taking?</h1>
+  <p>Enter your seats, how many times you turn them, and what each guest spends. See your weekly and annual revenue, and which lever would grow it most.</p>
+</header>
+
+<main>
+<section class="calc" id="calculator">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- INPUTS -->
+      <div>
+        <div class="card">
+          <div class="card-title">1. Your restaurant</div>
+          <div class="row2">
+            <div class="field">
+              <label for="seats">Seats</label>
+              <input type="number" id="seats" value="60" min="1" step="1">
+            </div>
+            <div class="field">
+              <label for="weeks">Trading weeks per year</label>
+              <input type="number" id="weeks" value="50" min="1" max="52" step="1">
+              <div class="hint">Leave out weeks you close for holidays.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. Each service</div>
+          <div class="section-label">Set days to 0 for a service you don't open</div>
+
+          <div class="service">
+            <div class="service-head">Lunch</div>
+            <div class="row3">
+              <div class="field"><label for="lDays">Days / week</label><input type="number" id="lDays" value="5" min="0" max="7" step="1"></div>
+              <div class="field"><label for="lTurns">Table turns</label><input type="number" id="lTurns" value="0.6" min="0" step="0.1"></div>
+              <div class="field"><label for="lSpend">Spend / head</label><div class="prefix"><span>$</span><input type="number" id="lSpend" value="28" min="0" step="0.5"></div></div>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="service-head">Dinner</div>
+            <div class="row3">
+              <div class="field"><label for="dDays">Days / week</label><input type="number" id="dDays" value="6" min="0" max="7" step="1"></div>
+              <div class="field"><label for="dTurns">Table turns</label><input type="number" id="dTurns" value="1.2" min="0" step="0.1"></div>
+              <div class="field"><label for="dSpend">Spend / head</label><div class="prefix"><span>$</span><input type="number" id="dSpend" value="55" min="0" step="0.5"></div></div>
+            </div>
+          </div>
+          <div class="hint" style="margin-top:12px">Table turns: guests served in the service ÷ seats. 72 guests in 60 seats is 1.2. Spend per head excludes GST/sales tax and tips.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. Other sales</div>
+          <div class="row2">
+            <div class="field">
+              <label for="other">Takeaway, delivery, functions</label>
+              <div class="prefix"><span>$</span><input type="number" id="other" value="1200" min="0" step="50"></div>
+              <div class="hint">Weekly, excluding tax and delivery-app fees.</div>
+            </div>
+            <div class="field">
+              <label for="target">Weekly target <span style="color:var(--hint)">(optional)</span></label>
+              <div class="prefix"><span>$</span><input type="number" id="target" value="35000" min="0" step="500"></div>
+              <div class="hint">For example, your break-even plus the profit you want.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="result-hero">
+          <div class="lbl">Revenue per week</div>
+          <div class="big" id="week">$0</div>
+          <div class="sub" id="weekSub">&nbsp;</div>
+          <div class="split">
+            <div><strong id="year">$0</strong>per year</div>
+            <div><strong id="month">$0</strong>per month</div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="v" id="covers">0</div><div class="l">Covers per week</div></div>
+          <div class="stat"><div class="v" id="avgSpend">$0</div><div class="l">Average spend, dine-in</div></div>
+          <div class="stat"><div class="v" id="perSeat">$0</div><div class="l">Revenue per seat / year</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Where the money comes from</div>
+          <table>
+            <thead><tr><th>Source</th><th class="num">Covers / wk</th><th class="num">Sales / wk</th><th class="num">Share</th></tr></thead>
+            <tbody id="mix"></tbody>
+          </table>
+        </div>
+
+        <div class="card" id="targetCard">
+          <div class="card-title">Against your target</div>
+          <div class="verdict" id="verdict"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">What would grow it most</div>
+          <table>
+            <thead><tr><th>If you…</th><th class="num">Extra per year</th></tr></thead>
+            <tbody id="levers"></tbody>
+          </table>
+          <a class="next-cta" href="/">Now check how much of it you keep →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<article class="content">
+  <div class="inner">
+
+    <h2>How to calculate restaurant revenue</h2>
+    <p>Restaurant revenue comes down to three numbers for each service: how many seats you have, how many times you fill them, and what each guest spends.</p>
+    <div class="formula"><strong>Weekly revenue = seats × table turns × trading days × average spend</strong>, for each service, plus takeaway and other sales</div>
+    <p>A table turn is one full use of your seats during a service. Serve 72 guests in a 60-seat room across a dinner service and you've turned the room 1.2 times. A figure below 1 means some seats stayed empty all night, which is normal for lunch in most suburban restaurants.</p>
+    <p>Work each service out separately. Lunch and dinner usually have very different turns and very different spend, and averaging them hides where the money actually comes from.</p>
+
+    <h2>A worked example</h2>
+    <p>The calculator above opens with this example. A 60-seat restaurant opens for lunch five days a week and dinner six nights, and does $1,200 a week in takeaway.</p>
+    <table>
+      <thead><tr><th>Service</th><th>Working</th><th class="num">Per week</th></tr></thead>
+      <tbody>
+        <tr><td>Lunch</td><td>60 seats × 0.6 turns × 5 days × $28</td><td class="num">$5,040</td></tr>
+        <tr><td>Dinner</td><td>60 seats × 1.2 turns × 6 nights × $55</td><td class="num">$23,760</td></tr>
+        <tr><td>Takeaway</td><td>Weekly sales</td><td class="num">$1,200</td></tr>
+        <tr class="hl"><td>Total</td><td>612 covers plus takeaway</td><td class="num">$30,000</td></tr>
+      </tbody>
+    </table>
+    <p>Over 50 trading weeks that's <strong>$1.5 million a year</strong>, or $25,000 per seat. Dinner brings in nearly four of every five dollars, which is common, and it means a quiet month at dinner hurts far more than a quiet month at lunch.</p>
+
+    <h2>The three ways to grow revenue</h2>
+    <h3>1. Lift average spend</h3>
+    <p>Usually the fastest and cheapest lever, because it needs no extra customers. Adding $3 a head in the example is worth about $92,000 a year. Drinks, sides and desserts are where most of that comes from, and they tend to carry better margins than mains. Our guide to <a href="/blog/restaurant-beverage-profit-margins">beverage profit margins</a> covers why drinks matter so much.</p>
+    <h3>2. Turn tables more often</h3>
+    <p>Only works if there's demand you're turning away. If you're full at 7pm and empty at 9pm, an earlier first sitting or shorter table times can add a turn. If the room is half empty all night, the problem is demand, not turns.</p>
+    <h3>3. Trade more sessions</h3>
+    <p>Opening an extra lunch or another night adds revenue, but it also adds wages, power and wear. It only pays if the new session's sales cover its own costs. The <a href="/break-even-calculator">break-even calculator</a> helps you test that before you commit staff to it.</p>
+    <p>To see these levers clearly you need covers and spend broken down by service, week by week. Most modern POS systems report this automatically; a system like <a href="https://www.touchbistro.com/point-of-sale-us/?book-a-demo-show=true&ls=16.%20Partner&ss=K%20-%20Referral&utm_campaign=restaurant-profit-calc&utm_source=referral&utm_medium=restaurantprofitcalc.com&utm_content=tm-calcs" rel="sponsored" target="_blank">TouchBistro</a> shows covers, average spend and table turns per service without you building a spreadsheet. <em>(Affiliate link: we may earn a commission if you book a demo through it, at no extra cost to you.)</em></p>
+
+    <h2>Forecasting revenue for a new restaurant</h2>
+    <p>The calculator works for a restaurant that hasn't opened yet, but be honest with the inputs. New owners almost always overestimate turns. A brand-new restaurant rarely trades at its long-run level in the first six to twelve months, and a plan that only works at full trade has no room for that ramp-up.</p>
+    <ul>
+      <li>Run the numbers at the turns you expect, then again at 20% lower. If the lower figure doesn't cover your costs, the plan is fragile.</li>
+      <li>Base average spend on comparable restaurants nearby, not on your menu prices. Not every guest orders a starter and a drink.</li>
+      <li>Don't sign a lease on the strength of the optimistic case. Rent is locked in; revenue isn't. <a href="/blog/why-restaurants-fail">Why restaurants fail</a> walks through what happens when revenue comes in 19% below plan.</li>
+    </ul>
+    <p>For a full forecast with costs, cash flow and financing, FinModelsLab's <a href="https://finmodelslab.com/products/restaurant-financial-model?ref=dxoajnde" rel="sponsored" target="_blank">restaurant financial model</a> is a ready-made spreadsheet template. <em>(Affiliate link: we may earn a small commission if you buy through it, at no extra cost to you.)</em> Our guide to <a href="/blog/restaurant-startup-costs">restaurant startup costs</a> covers the spending side.</p>
+
+    <h2>Revenue isn't profit</h2>
+    <p>A restaurant can take $1.5 million and still lose money. Revenue tells you the size of the business; food cost, labour and rent decide how much of it you keep. Once you know your revenue, the <a href="/">restaurant profit calculator</a> shows your real margin, and <a href="/blog/what-is-a-good-restaurant-profit-margin">what a good restaurant profit margin looks like</a> puts it in context.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>How do you calculate restaurant revenue?</h3>
+    <p>For each service, multiply seats by table turns by trading days to get covers, then multiply by average spend per head. Add the services together, plus takeaway and other sales.</p>
+    <h3>What is a table turn?</h3>
+    <p>One full use of your seats during a service. Guests served ÷ seats. 72 guests in 60 seats is 1.2 turns.</p>
+    <h3>Which lever increases revenue fastest?</h3>
+    <p>If you're full at peak times, average spend or an extra service. If you have empty seats, more covers. The table in the calculator shows the annual effect of each lever on your own numbers.</p>
+    <h3>Should revenue include GST or sales tax?</h3>
+    <p>No. Use spend excluding GST, VAT or sales tax. The tax isn't your money, and including it overstates everything that depends on revenue, including your cost percentages.</p>
+    <h3>How do I find my actual table turns?</h3>
+    <p>Take the covers your POS recorded for a service and divide by your seats. Do it for a few typical weeks rather than one; a single busy Saturday will flatter the figure.</p>
+
+    <div class="related">
+      <p>Related</p>
+      <ul>
+        <li><a href="/">Restaurant profit calculator: food, labour and prime cost from a week of figures</a></li>
+        <li><a href="/break-even-calculator">Break-even calculator: the sales and covers you need</a></li>
+        <li><a href="/menu-price-calculator">Menu price calculator</a></li>
+        <li><a href="/blog/restaurant-kpis-to-track">The restaurant KPIs worth tracking</a></li>
+      </ul>
+    </div>
+
+    <p class="byline">Written by <a href="/about">Terry McDonnell</a>, chartered accountant and former restaurant and franchise owner. Results are indicative only.</p>
+  </div>
+</article>
+</main>
+
+<footer>
+  <p>RestaurantProfitCalc — free profitability tools for restaurant and hospitality operators.<br>
+  Results are indicative only. Always consult a qualified accountant for formal financial advice.<br>
+  <a href="/">Calculator</a> · <a href="/revenue-calculator">Revenue calculator</a> · <a href="/menu-price-calculator">Menu price calculator</a> · <a href="/break-even-calculator">Break-even calculator</a> · <a href="/pour-cost-calculator">Pour cost calculator</a> · <a href="/menu-engineering-calculator">Menu engineering calculator</a> · <a href="/blog/">Blog</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(id){ var v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : 0; };
+  var m0 = function(v){ var s = Math.round(Math.abs(v)).toLocaleString('en-US'); return (v < 0 ? '−$' : '$') + s; };
+  var short = function(v){
+    if (Math.abs(v) >= 1e6) return '$' + (Math.round(v / 1e5) / 10) + 'M';
+    if (Math.abs(v) >= 1e4) return '$' + Math.round(v / 1e3) + 'k';
+    return m0(v);
+  };
+  var ids = ['seats','weeks','lDays','lTurns','lSpend','dDays','dTurns','dSpend','other','target'];
+
+  function svc(seats, days, turns, spend){
+    var covers = seats * turns * days;
+    return { covers: covers, sales: covers * spend };
+  }
+
+  function calc(){
+    var seats = Math.round(num('seats'));
+    var weeks = Math.min(52, num('weeks'));
+    var lDays = Math.min(7, Math.round(num('lDays'))), dDays = Math.min(7, Math.round(num('dDays')));
+    var lT = num('lTurns'), dT = num('dTurns'), lS = num('lSpend'), dS = num('dSpend');
+    var other = num('other');
+
+    var L = svc(seats, lDays, lT, lS), D = svc(seats, dDays, dT, dS);
+    var dine = L.sales + D.sales, covers = L.covers + D.covers;
+    var week = dine + other, year = week * weeks;
+    var days = Math.max(lDays, dDays);
+
+    $('week').textContent = m0(week);
+    $('weekSub').textContent = days > 0 ? m0(week / days) + ' per trading day, excluding tax' : 'Excluding tax';
+    $('year').textContent = short(year);
+    $('month').textContent = short(year / 12);
+    $('covers').textContent = Math.round(covers).toLocaleString('en-US');
+    $('avgSpend').textContent = covers > 0 ? '$' + (dine / covers).toFixed(2) : '—';
+    $('perSeat').textContent = seats > 0 ? short(year / seats) : '—';
+
+    // mix
+    var share = function(v){ return week > 0 ? Math.round(v / week * 100) + '%' : '—'; };
+    var rows = '';
+    if (lDays > 0) rows += '<tr><td>Lunch</td><td class="num">' + Math.round(L.covers).toLocaleString('en-US') + '</td><td class="num">' + m0(L.sales) + '</td><td class="num">' + share(L.sales) + '</td></tr>';
+    if (dDays > 0) rows += '<tr><td>Dinner</td><td class="num">' + Math.round(D.covers).toLocaleString('en-US') + '</td><td class="num">' + m0(D.sales) + '</td><td class="num">' + share(D.sales) + '</td></tr>';
+    if (other > 0) rows += '<tr><td>Takeaway &amp; other</td><td class="num">—</td><td class="num">' + m0(other) + '</td><td class="num">' + share(other) + '</td></tr>';
+    rows += '<tr class="hl"><td>Total</td><td class="num">' + Math.round(covers).toLocaleString('en-US') + '</td><td class="num">' + m0(week) + '</td><td class="num">' + (week > 0 ? '100%' : '—') + '</td></tr>';
+    $('mix').innerHTML = rows;
+
+    // target
+    var target = num('target'), card = $('targetCard'), v = $('verdict');
+    if (target > 0) {
+      card.style.display = 'block';
+      var gap = target - week;
+      var avg = covers > 0 ? dine / covers : 0;
+      if (gap <= 0) {
+        v.className = 'verdict good';
+        v.textContent = 'You are ' + m0(-gap) + ' a week above your target of ' + m0(target) + '.';
+      } else {
+        var extra = avg > 0 && days > 0 ? Math.ceil(gap / avg / days) : null;
+        var lift = covers > 0 ? (gap / covers) : null;
+        v.className = 'verdict ' + (gap / target <= 0.1 ? 'warn' : 'bad');
+        v.textContent = 'You are ' + m0(gap) + ' a week short of ' + m0(target) + '. ' +
+          (extra !== null ? 'Closing it needs about ' + extra + ' more covers a day at your current average spend, or $' + lift.toFixed(2) + ' more per head on the covers you already have.' : '');
+      }
+    } else {
+      card.style.display = 'none';
+    }
+
+    // levers
+    var lv = [];
+    if (covers > 0) lv.push(['Add $3 to average spend', covers * 3 * weeks]);
+    if (dDays > 0) lv.push(['Add 0.2 turns at dinner', seats * 0.2 * dDays * dS * weeks]);
+    if (lDays > 0) lv.push(['Add 0.2 turns at lunch', seats * 0.2 * lDays * lS * weeks]);
+    if (dine > 0) lv.push(['Get 10% more covers', dine * 0.1 * weeks]);
+    if (lDays > 0 && lDays < 7) lv.push(['Open one more lunch', seats * lT * lS * weeks]);
+    if (dDays > 0 && dDays < 7) lv.push(['Open one more dinner', seats * dT * dS * weeks]);
+    lv = lv.filter(function(r){ return r[1] > 0; }).sort(function(a, b){ return b[1] - a[1]; });
+    $('levers').innerHTML = lv.map(function(r, i){
+      return '<tr' + (i === 0 ? ' class="hl"' : '') + '><td>' + r[0] + '</td><td class="num">+' + m0(r[1]) + '</td></tr>';
+    }).join('') || '<tr><td colspan="2">Enter your seats and services to compare levers.</td></tr>';
+  }
+
+  ids.forEach(function(id){ $(id).addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
